@@ -1,0 +1,440 @@
+#
+#
+#  Templates
+#
+#
+ sensor.weather_temp_range:
+   icon: mdi:thermometer-lines
+ sensor.weather_precip:
+   icon: mdi:water
+ sensor.lennox_range:
+   icon: mdi:thermometer-lines
+
+#
+#
+#  Groups
+#
+#
+ group.office_floor_lamps:
+   hidden: true
+ group.office_ambient_lights:
+   hidden: true
+ group.office_lights:
+   hidden: false
+   
+#
+#  DarkSky Weather
+#
+# visible
+ sensor.dark_sky_temperature:
+   hidden: false
+   friendly_name: Temperature
+ sensor.dark_sky_humidity:
+   hidden: false
+   friendly_name: Humidity
+ sensor.dark_sky_daily_low_temperature:
+   hidden: true
+   friendly_name: Low
+ sensor.dark_sky_daily_high_temperature:
+   hidden: true
+   friendly_name: High
+ sensor.dark_sky_precip_probability:
+   hidden: true
+   friendly_name: Precip. Probability
+ sensor.dark_sky_precip_intensity:
+   hidden: true
+   friendly_name: Precip. Intensity
+
+# hidden
+ sensor.dark_sky_hourly_summary:
+   hidden: true
+   friendly_name: Hourly Summary
+ sensor.dark_sky_daily_summary:
+   hidden: true
+   friendly_name: Daily Summary
+ sensor.dark_sky_icon:
+   hidden: true
+   friendly_name: Sky Icon
+ sensor.dark_sky_apparent_temperature:
+   hidden: true
+   friendly_name: Apparent Temperature
+ sensor.dark_sky_cloud_coverage:
+   hidden: true
+   friendly_name: Cloud Coverage
+ sensor.dark_sky_daily_high_apparent_temperature:
+   hidden: true
+   friendly_name: High Apparent Temperature
+ sensor.dark_sky_daily_low_apparent_temperature:
+   hidden: true
+   friendly_name: Low Apparent Temperature
+ sensor.dark_sky_daily_max_precip_intensity:
+   hidden: true
+   friendly_name: Daily Max Precip. Intensity
+ sensor.dark_sky_dew_point:
+   hidden: true
+   friendly_name: Dew point
+ sensor.dark_sky_minutely_summary:
+   hidden: true
+   friendly_name: Minutely Summary
+ sensor.dark_sky_nearest_storm_bearing:
+   hidden: true
+   friendly_name: Nearest Storm Bearing
+ sensor.dark_sky_nearest_storm_distance:
+   hidden: true
+   friendly_name: Nearest Storm Distance
+ sensor.dark_sky_ozone:
+   hidden: true
+   friendly_name: OZone
+ sensor.dark_sky_precip:
+   hidden: true
+   friendly_name: Precipitation
+ sensor.dark_sky_pressure:
+   hidden: true
+   friendly_name: Pressur
+ sensor.dark_sky_summary:
+   hidden: true
+   friendly_name: Summary
+ sensor.dark_sky_visibility:
+   hidden: true
+   friendly_name: Visibility
+ sensor.dark_sky_wind_bearing:
+   hidden: true
+   friendly_name: Wind Bearing
+ sensor.dark_sky_wind_speed:
+   hidden: true
+   friendly_name: Wind Speed
+
+#
+#  Lennox Thermostat Customizations
+#
+#visible
+ sensor.lennox_temperature:
+   friendly_name: Temperature
+   hidden: false
+   icon: mdi:thermometer
+ sensor.lennox_humidity:
+   friendly_name: Humidity
+   hidden: false
+   icon: mdi:water-percent
+ sensor.lennox_status:
+   friendly_name: Status
+   hidden: false
+   icon: mdi:timetable
+#hidden
+ sensor.lennox_heat_to:
+   friendly_name: Heat-to
+   hidden: true
+   icon: mdi:arrow-up
+ sensor.lennox_cool_to:
+   friendly_name: Cool-to
+   hidden: true
+   icon: mdi:arrow-down
+
+#
+#  Office light
+#
+ light.office:
+   hidden: true 
+ light.huehalloweenactivelightsgroup:
+   hidden: true 
+ light.xmasactivegroup:
+   hidden: true 
+ light.xmasactivegroupeven:
+   hidden: true 
+ light.xmasactivegroupodd:
+   hidden: true 
+
+#
+#  Foscam / Daniel's Room
+#
+ camera.foscam_camera:
+   hidden: false
+   friendly_name: Daniel's Room
+
+#
+#  Heden / Hallway
+#   
+ camera.mjpeg_camera:
+   hidden: false
+   friendly_name: Entrance
+
+#
+#
+#  iPad Scripts
+#
+#
+ script.ipad_daniel_unlock:
+   icon: mdi:lock-open
+   hidden: true
+ script.ipad_daniel_lock:
+   icon: mdi:lock
+   hidden: false
+ script.ipad_daniel_volume_up:
+   icon: mdi:volume-high
+   hidden: false
+ script.ipad_daniel_volume_down:
+   icon: mdi:volume-medium
+   hidden: false
+ script.ipad_startup_daniel_room:
+   icon: mdi:play-circle
+   hidden: false
+ script.ipad_startup_chuchutv:
+   icon: mdi:play-circle
+   hidden: false
+ script.ipad_startup_clock:
+   icon: mdi:play-circle
+   hidden: false
+
+#
+#  Office Scripts
+#
+ script.office_entrance_script:
+   icon: mdi:voice
+   hidden: false
+   friendly_name: Greeting
+ script.office_lock_pc:
+   icon: mdi:lock
+   hidden: false
+ script.office_unlock_pc:
+   icon: mdi:lock-open
+   hidden: false
+ script.office_daniel_audio:
+   icon: mdi:volume-high
+   hidden: false
+ binary_sensor.pir_office:
+   friendly_name: Motion
+   hidden: false
+
+#
+#  Kitchen Scripts
+#
+ script.kitchen_daniel_video:
+   icon: mdi:play-circle
+   hidden: false   
+ script.kitchen_greeting_script:
+   icon: mdi:voice
+   hidden: false
+   friendly_name: Greeting 
+   
+#
+#  Living Room Scripts
+#
+ script.shield_greeting_script:
+   icon: mdi:voice
+   hidden: false
+   friendly_name: Greeting
+#
+#  IPCam Scripts
+#
+ script.hallcam_staircase_script:
+   icon: mdi:camcorder-box
+   hidden: false
+   friendly_name: Staircase
+ script.hallcam_door_script:
+   icon: mdi:camcorder-box
+   hidden: false
+   friendly_name: Front Door
+ script.hallcam_diningroon_script:
+   icon: mdi:camcorder-box
+   hidden: false
+   friendly_name: Dining Room
+ script.hallcam_totto_script:
+   icon: mdi:camcorder-box
+   hidden: false
+   friendly_name: Totto Bed
+ script.babycam_crib_script:
+   icon: mdi:camcorder-box
+   hidden: false
+   friendly_name: Daniel's Crib
+ script.babycam_room_script:
+   icon: mdi:camcorder-box
+   hidden: false
+   friendly_name: Daniels' Room 
+ switch.hallcam_motion:
+   hidden: true
+ switch.hallcam_motion2:
+   hidden: true
+ switch.babycam_motion:
+   hidden: true
+ switch.babycam_zoom:
+   hidden: true
+
+#
+#  Hidden Switches
+#
+ switch.ipad_home:
+   hidden: true
+ switch.ipad_lock:
+   hidden: true
+ switch.ipad_unlock:
+   hidden: true
+ switch.ipad_volume_up:
+   hidden: true
+ switch.ipad_volume_down:
+   hidden: true
+ switch.ipad_xbmc:
+   hidden: true
+ switch.jerome_laptop_lock:
+   hidden: true
+ switch.jerome_laptop_unlock:
+   hidden: true
+
+#
+#  Hidden Scripts
+#
+ script.office_empty_script:
+   hidden: true
+   
+#
+#  Weather Underground
+#
+#visible
+ sensor.PWS_uv:
+   hidden: false
+   friendly_name: UV Level
+   icon: mdi:sunglasses
+#hidden
+ sensor.PWS_weather:
+   hidden: true
+   friendly_name: Conditions
+   icon: mdi:weather-cloudy   
+ sensor.PWS_temp_c:
+   hidden: true
+   friendly_name: Temperature
+   icon: mdi:thermometer
+ sensor.PWS_relative_humidity:
+   hidden: true
+   friendly_name: Relative Humidity
+   icon: mdi:water-percent
+ sensor.PWS_precip_today_metric:
+   hidden: true
+   friendly_name: Precip Today mm
+   icon: mdi:water
+ sensor.PWS_wind_kph:
+   hidden: true
+   friendly_name: Sustained Wind Speed KPH
+   icon: mdi:weather-windy
+ sensor.PWS_alerts:
+   hidden: true
+   friendly_name: Alert
+   icon: mdi:alert-circle
+ sensor.PWS_pressure_in:
+   hidden: true
+   friendly_name: Barometric Pressure in
+   icon: mdi:nature
+ sensor.PWS_pressure_mb:
+   hidden: true
+   friendly_name: Barometric Pressure mb
+   icon: mdi:nature
+ sensor.PWS_dewpoint_c:
+   hidden: true
+   friendly_name: Dew Point C
+   icon: mdi:oil-temperature
+ sensor.PWS_dewpoint_f:
+   hidden: true
+   friendly_name: Dew Point F
+   icon: mdi:oil-temperature
+ sensor.PWS_dewpoint_string:
+   hidden: true
+   friendly_name: Dewpoint String
+   icon: mdi:oil-temperature
+ sensor.PWS_feelslike_c:
+   hidden: true
+   friendly_name: Feels Like C
+   icon: mdi:account-alert
+ sensor.PWS_feelslike_f:
+   hidden: true
+   friendly_name: Feels Like F
+   icon: mdi:account-alert
+ sensor.PWS_feelslike_string:
+   hidden: true
+   friendly_name: Feels Like String
+   icon: mdi:thermometer-lines
+ sensor.PWS_heat_index_c:
+   hidden: true
+   friendly_name: Heat Index C
+   icon: mdi:thermometer-lines
+ sensor.PWS_heat_index_f:
+   hidden: true
+   friendly_name: Heat Index F
+   icon: mdi:thermometer-lines
+ sensor.PWS_heat_index_string:
+   hidden: true
+   friendly_name: Heat Index String
+   icon: mdi:thermometer-lines
+ sensor.PWS_precip_today_in:
+   hidden: true
+   friendly_name: Precip Today in
+   icon: mdi:water
+ sensor.PWS_precip_today_string:
+   hidden: true
+   friendly_name: Precip Today String
+   icon: mdi:weather-rainy
+ sensor.PWS_solarradiation:
+   hidden: true
+   friendly_name: Solar Radiation
+   icon: mdi:weather-sunny
+ sensor.PWS_station_id:
+   hidden: true
+   friendly_name: Station ID
+   icon: mdi:fingerprint
+ sensor.PWS_wind_mph:
+   hidden: true
+   friendly_name: Sustained Wind Speed MPH
+   icon: mdi:weather-windy
+ sensor.PWS_temp_f:
+   hidden: true
+   friendly_name: Temperature
+   icon: mdi:thermometer
+ sensor.PWS_visibility_km:
+   hidden: true
+   friendly_name: Visibility km
+   icon: mdi:weather-fog
+ sensor.PWS_visibility_mi:
+   hidden: true
+   friendly_name: Visibility mi
+   icon: mdi:weather-fog
+ sensor.PWS_wind_dir:
+   hidden: true
+   friendly_name: Wind Direction
+   icon: mdi:compass
+ sensor.PWS_wind_string:
+   hidden: true
+   friendly_name: Wind String
+   icon: mdi:weather-windy   
+ sensor.PWS_location:
+   hidden: true
+   friendly_name: Location
+   icon: mdi:earth
+ sensor.PWS_elevation:
+   hidden: true
+   friendly_name: Elev. above sea level
+   icon: mdi:upload
+ sensor.PWS_observation_time:
+   hidden: true
+   friendly_name: Observation Time
+   icon: mdi:calendar-clock
+ sensor.PWS_precip_1hr_string:
+   hidden: true
+   friendly_name: Precip Last Hour String
+   icon: mdi:cup-water
+ sensor.PWS_wind_degrees:
+   hidden: true
+   friendly_name: Wind Bearing
+   icon: mdi:apple-safari
+ sensor.PWS_precip_1hr_in:
+   friendly_name: Precip Last Hour in
+   icon: mdi:cup-water
+   hidden: true
+ sensor.PWS_wind_gust_mph:
+   friendly_name: Wind Gust Speed MPH
+   icon: mdi:speedometer
+   hidden: true
+ sensor.PWS_precip_1hr_metric:
+   friendly_name: Precip Last Hour mm
+   icon: mdi:cup-water
+   hidden: true
+ sensor.PWS_wind_gust_kph:
+   friendly_name: Wind Gust Speed kph
+   icon: mdi:speedometer
+   hidden: true

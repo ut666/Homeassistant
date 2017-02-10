@@ -1,0 +1,9 @@
+alias: Office Floor Lamps - Adjust Brightness
+trigger:
+  platform: state
+  entity_id: input_slider.office_floor_lamps
+action:
+  service: light.turn_on
+  data_template:
+    entity_id: group.office_floor_lamps
+    brightness: '{{ trigger.to_state.state | int }}'

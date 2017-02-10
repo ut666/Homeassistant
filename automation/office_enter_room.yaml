@@ -1,0 +1,14 @@
+  alias: Turn on light and greet when office senses motion
+  trigger:
+     platform: state
+     entity_id: binary_sensor.pir_office
+     to: 'on'
+  condition:
+     condition: and
+     conditions:
+       - condition: state
+         entity_id: 'group.office_lights'
+         state: 'off'
+  action:
+     service: script.turn_on
+     entity_id: script.office_entrance_script

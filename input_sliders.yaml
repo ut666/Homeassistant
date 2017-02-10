@@ -1,0 +1,15 @@
+office_floor_lamps:
+  name: Floor Lamps
+  min: 0
+  max: 254
+  initial: 254
+  step: 1
+  icon: mdi:lightbulb-on
+  
+office_ambient_lights:
+  name: Ambient Lights
+  min: 0
+  max: 254
+  initial: 254
+  step: 1
+  icon: mdi:lightbulb-on

@@ -1,0 +1,6 @@
+#Lennox iComfort thermostat 
+platform: mqtt
+name: "Heat-To"
+state_topic: "smartthings/Thermostat/heatingSetpoint" 
+unit_of_measurement: '°C'
+retain: true

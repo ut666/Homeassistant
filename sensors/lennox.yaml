@@ -1,0 +1,4 @@
+platform: lennox
+username: !secret lennox_username
+password: !secret lennox_password
+hidden: true

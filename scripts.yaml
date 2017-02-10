@@ -1,0 +1,263 @@
+#
+# IPCAM: HallCam
+#
+hallcam_staircase_script:
+ sequence:
+   - service: switch.turn_off
+     entity_id: switch.hallcam_motion
+   - service: notify.notify
+     data:
+       message: 'HallCam moving to staircase view.'
+hallcam_door_script:
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.hallcam_motion
+   - service: notify.notify
+     data:
+       message: 'HallCam moving to front door view.'
+hallcam_diningroon_script:
+ sequence:
+   - service: switch.turn_off
+     entity_id: switch.hallcam_motion2
+   - service: notify.notify
+     data:
+       message: 'HallCam moving to dining room view.'
+hallcam_totto_script:
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.hallcam_motion2
+   - service: notify.notify
+     data:
+       message: 'HallCam moving to totto view.'
+#
+# IPCAM: BabyCam
+#
+babycam_crib_script:
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.babycam_motion
+   - service: switch.turn_on
+     entity_id: switch.babycam_zoom
+   - service: notify.notify
+     data:
+       message: 'BabyCam moving to crib view.'
+babycam_room_script:
+ sequence:
+   - service: switch.turn_off
+     entity_id: switch.babycam_zoom
+   - service: switch.turn_off
+     entity_id: switch.babycam_motion
+   - service: notify.notify
+     data:
+       message: 'BabyCam moving to room view.'
+shield_greeting_script:
+ sequence:
+   - service: tts.google_say
+     data_template:
+       entity_id: media_player.shield
+       message: >
+          {% if now().strftime("%H")|int < 12 %}
+          Good morning.
+          {% elif now().strftime("%H")|int < 18 %}
+          Good afternoon.
+          {% else %}
+          Good evening.
+          {% endif %}
+          The house temperature is currently {{states.sensor.lennox_temperature.state|round}} degrees. Outside is {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees.  Today will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daily_high_temperature.state|round}} degrees.
+   - delay:
+      seconds: 10
+   - service: media_player.turn_off
+     entity_id: media_player.shield
+   - service: media_player.turn_off
+     entity_id: media_player.tv
+
+#
+# SHIELD TV
+#    
+shield_daniel_video:
+ alias: Watch Daniel's Room
+ sequence:
+   - service: media_player.play_media
+     data_template:
+        entity_id: media_player.shield
+        media_content_id: "rtsp://ut666:Matura2000@10.0.0.42:88/videoSub"
+        media_content_type: "video"
+
+#
+# Kitchen
+#    
+     
+kitchen_greeting_script:
+ sequence:
+   - service: tts.google_say
+     data_template:
+       entity_id: media_player.kitchen
+       message: >
+          {% if now().strftime("%H")|int < 12 %}
+          Good morning.
+          {% elif now().strftime("%H")|int < 18 %}
+          Good afternoon.
+          {% else %}
+          Good evening.
+          {% endif %}
+          The house temperature is currently {{states.sensor.lennox_temperature.state|round}} degrees. Outside is {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees.  Today will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daily_high_temperature.state|round}} degrees.
+
+kitchen_daniel_video:
+ alias: Watch Daniel's Room
+ sequence:
+   - service: media_player.play_media
+     data_template:
+        entity_id: media_player.kitchen
+        media_content_id: "rtsp://ut666:Matura2000@10.0.0.42:88/videoSub"
+        media_content_type: "video"
+        
+kitchen_clock_chime:
+ alias: Clock Chime
+ sequence:
+   - service: media_player.play_media
+     data_template:
+        entity_id: media_player.kitchen
+        media_content_id: '/mnt/shell/emulated/0/GFChime/GrandFatherChime10.wav'
+        media_content_type: "music"
+#
+# iPad
+#    
+ipad_startup_chuchutv:
+ alias: Start ChuChuTV
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_unlock
+   - service: automation.turn_on
+     entity_id: automation.launch_chuchutv_when_ipad_xbmc_is_ready
+   - service: switch.turn_on
+     entity_id: switch.ipad_xbmc
+
+ipad_chuchutv:
+ alias: Watch ChuChuTV
+ sequence:
+   - service: media_player.play_media
+     data_template:
+        entity_id: media_player.ipad
+        media_content_id: "/private/var/mobile/Library/Preferences/Kodi/userdata/playlists/video/ChuChuTV.m3u"
+        media_content_type: "video"
+   - service: automation.turn_off
+     entity_id: automation.launch_chuchutv_when_ipad_xbmc_is_ready
+
+ipad_startup_clock:
+ alias: Start Clock Collection
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_unlock
+   - service: automation.turn_on
+     entity_id: automation.launch_clock_collection_when_ipad_xbmc_is_ready
+   - service: switch.turn_on
+     entity_id: switch.ipad_xbmc
+
+ipad_clock:
+ alias: Watch Clock Collection
+ sequence:
+   - service: media_player.play_media
+     data_template:
+        entity_id: media_player.ipad
+        media_content_id: "/private/var/mobile/Library/Preferences/Kodi/userdata/playlists/video/Clocks.m3u"
+        media_content_type: "video"
+   - service: automation.turn_off
+     entity_id: automation.launch_clock_collection_when_ipad_xbmc_is_ready
+
+ipad_startup_daniel_room:
+ alias: Start Daniel's Room
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_unlock
+   - service: automation.turn_on
+     entity_id: automation.launch_daniels_room_when_ipad_xbmc_is_ready
+   - service: switch.turn_on
+     entity_id: switch.ipad_xbmc
+
+ipad_daniel_room:
+ alias: Watch Daniel's Room
+ sequence:
+   - service: media_player.play_media
+     data_template:
+        entity_id: media_player.ipad
+        media_content_id: "rtsp://ut666:Matura2000@10.0.0.42:88/videoSub"
+        media_content_type: "video"
+   - service: automation.turn_off
+     entity_id: automation.launch_daniels_room_when_ipad_xbmc_is_ready
+     
+ipad_daniel_volume_up:
+ alias: Volume Up
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_volume_up
+        
+ipad_daniel_volume_down:
+ alias: Volume Down
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_volume_down
+
+ipad_daniel_unlock:
+ alias: Unlock
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_unlock
+
+ipad_daniel_lock:
+ alias: Lock
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_lock
+
+#
+# Office
+#    
+
+office_lock_pc:
+ alias: Lock PC
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.jerome_laptop_lock
+
+office_unlock_pc:
+ alias: Unlock PC
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.jerome_laptop_unlock
+
+office_daniel_audio:
+ alias: Listen to Daniel's Room
+ sequence:
+   - service: media_player.play_media
+     data_template:
+        entity_id: media_player.office
+        media_content_id: "rtsp://ut666:Matura2000@10.0.0.42:88/audio"
+        media_content_type: "music"
+      
+office_empty_script:
+ alias: Empty
+ sequence:
+   - service: light.turn_off
+     entity_id: group.office   
+   - service: switch.turn_on
+     entity_id: switch.jerome_laptop_lock     
+     
+office_entrance_script:
+ alias: Greeting
+ sequence:
+   - service: light.turn_on
+     entity_id: group.office   
+   - service: switch.turn_on
+     entity_id: switch.jerome_laptop_unlock     
+   - service: tts.google_say
+     data_template:
+       entity_id: media_player.office
+       message: >
+          {% if now().strftime("%H")|int < 12 %}
+          Good morning Jerome.
+          {% elif now().strftime("%H")|int < 18 %}
+          Good afternoon Jerome.
+          {% else %}
+          Good evening Jerome.
+          {% endif %}
+          It's currently {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees in Grayslake. Today will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daily_high_temperature.state|round}} degrees.

@@ -1,0 +1,12 @@
+alias: Turn off light when offices senses no motion for 1 hr
+trigger:
+   platform: state
+   entity_id: binary_sensor.pir_office
+   to: 'off'
+   # Will trigger when state has been the to state for X time.
+   state: 'off'
+   for:
+      minutes: 15
+action:
+   service: script.turn_on
+   entity_id: script.office_empty_script

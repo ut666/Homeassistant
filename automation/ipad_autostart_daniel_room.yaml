@@ -1,0 +1,9 @@
+  alias: Launch Daniel's Room when iPad XBMC is ready
+  initial_state: False
+  trigger:
+     platform: state
+     entity_id: media_player.ipad
+     to: 'idle'
+  action:
+     service: script.turn_on
+     entity_id: script.ipad_daniel_room

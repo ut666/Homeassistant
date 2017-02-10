@@ -1,0 +1,93 @@
+weather:
+   name: Weather
+   entities:
+      - sun.sun
+      - sensor.dark_sky_temperature
+      - sensor.weather_temp_range
+      - sensor.weather_precip
+      - sensor.dark_sky_humidity
+      - sensor.PWS_uv
+
+
+thermostat:
+   name: Thermostat
+   entities:
+      - sensor.lennox_temperature
+      - sensor.lennox_range
+      - sensor.lennox_humidity
+      - sensor.lennox_status
+
+living_room:
+   name: Living Room
+   control: hidden
+   entities:
+      - script.shield_greeting_script
+
+camera:
+   name: Camera Presets
+   control: hidden
+   entities:
+      - script.hallcam_staircase_script
+      - script.hallcam_door_script
+      - script.hallcam_diningroon_script
+      - script.hallcam_totto_script
+      - script.babycam_crib_script
+      - script.babycam_room_script
+
+kitchen:
+   name: Kitchen
+   control: hidden
+   entities:
+      - script.kitchen_greeting_script
+      - script.kitchen_daniel_audio
+      - script.kitchen_daniel_video
+      - media_player.kitchen
+      
+ipad:
+   name: Daniel's iPad
+   control: hidden
+   entities:
+      - script.ipad_startup_daniel_room
+      - script.ipad_startup_chuchutv
+      - script.ipad_startup_clock
+      - script.ipad_daniel_lock
+      - script.ipad_daniel_volume_up
+      - script.ipad_daniel_volume_down
+      - media_player.ipad
+ 
+office_floor_lamps:
+   name: Floor Lamps
+   entities:
+      - light.floor_lamp_1
+      - light.floor_lamp_2
+
+office_ambient_lights:
+   name: Ambient Lights
+   entities:
+      - light.ambient_light_1
+      - light.ambient_light_2
+      
+office_lights:
+   name: Office Lights
+   entities:
+      - light.floor_lamp_1
+      - light.floor_lamp_2
+      - input_slider.office_floor_lamps
+      - light.ambient_light_1
+      - light.ambient_light_2
+      - input_slider.office_ambient_lights
+      
+office:
+   name: Office
+   control: hidden
+   entities:
+      - group.office_lights
+      - group.office_floor_lamps
+      - group.office_ambient_lights
+      - script.office_entrance_script
+      - script.office_daniel_audio
+      - binary_sensor.pir_office
+      - script.office_lock_pc
+      - script.office_unlock_pc
+      - media_player.office
+      

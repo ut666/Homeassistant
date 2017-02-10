@@ -1,0 +1,190 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude  
+  longitude: !secret longitude  
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret timezone
+
+  #Load all my customizations
+  customize: !include customizations.yaml
+
+# Enables the frontend
+frontend:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  api_password: !secret api_password
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# mqtt broker
+mqtt:
+   broker: 10.0.0.2 
+   port: 1883
+   client_id: hass
+   keepalive: 60
+ 
+# DD-WRT Device Tracker
+#device_tracker:
+#  - platform: ddwrt
+#    host: 10.0.0.1
+#    username: !secret ddwrt_username
+#    password: !secret ddwrt_password
+#    interval_seconds: 10
+#    consider_home: 180
+#    track_new_devices: no
+
+#Bluetooth tracker
+#device_tracker:
+#   - platform: bluetooth_tracker
+
+#mqtt tracker
+device_tracker:
+  - platform: mqtt
+    devices:
+      jerome: smartthings/Jerome/presence
+      
+ #IPCams
+camera:
+  - platform: foscam
+    ip: 10.0.0.42
+    username: !secret foscam_username
+    password: !secret foscam_password
+  - platform: mjpeg
+    mjpeg_url: !secret heden_url
+    username: !secret heden_username
+    password: !secret heden_password
+#  - platform: synology
+#    url: https://10.0.0.3:5000/
+#    username: !secret synology_username
+#    password: !secret synology_password
+#    verify_ssl: False     
+
+#Our switches
+switch:
+  - platform: command_line
+    switches:
+      hallcam_motion:
+        command_on: !secret heden_preset1
+        command_off: !secret heden_preset2
+      hallcam_motion2:
+        command_on: !secret heden_preset3
+        command_off: !secret heden_preset4
+      babycam_motion:
+        command_on: !secret foscam_preset1
+        command_off: !secret foscam_preset1
+      babycam_zoom:
+        command_on: !secret foscam_zoomin
+        command_off: !secret foscam_zoomout
+      jerome_laptop_lock:
+        command_on: !secret office_laptop_lock
+      jerome_laptop_unlock:
+        command_on: !secret office_laptop_unlock
+      ipad_xbmc:
+        command_on: 'ssh root@10.0.0.113 "open org.xbmc.kodi-ios"'
+      ipad_lock:
+        command_on: 'ssh root@10.0.0.113 "activator send libactivator.system.sleepbutton"'
+      ipad_unlock:
+        command_on: 'ssh root@10.0.0.113 "activator send libactivator.lockscreen.dismiss"'
+      ipad_volume_up:
+        command_on: 'ssh root@10.0.0.113 "activator send libactivator.audio.increase-volume"'
+      ipad_volume_down:
+        command_on: 'ssh root@10.0.0.113 "activator send libactivator.audio.decrease-volume"'
+      ipad_home:
+        command_on: 'ssh root@10.0.0.113 "activator send libactivator.system.homebutton"'
+      kitchen_stop_daydream: 
+        command_on: 'ssh root@10.0.0.103 "service call dreams 2"'
+      kitchen_start_daydream: 
+        command_on: 'ssh root@10.0.0.103 "service call dreams 1"'
+      kitchen_power_button: 
+        command_on: 'ssh root@10.0.0.103 "input keyevent 26"'
+      kitchen_volume_down: 
+        command_on: 'ssh root@10.0.0.103 "input keyevent 25"'
+      kitchen_volume_up: 
+        command_on: 'ssh root@10.0.0.103 "input keyevent 24"'
+      kitchen_swipe_unlock: 
+        command_on: 'ssh root@10.0.0.103 "input swipe 750 400 850 400"'
+      kitchen_start_xbmc: 
+        command_on: 'ssh root@10.0.0.103 "start -n org.xbmc.kodi/org.xbmc.kodi.Splash"'
+
+#Our scripts
+script: !include scripts.yaml   
+
+#Our sliders
+input_slider: !include input_sliders.yaml
+
+#Our text-to-speech
+tts:
+  - platform: google
+    #language: 'en-uk'
+
+#Our binary sensors
+binary_sensor:
+  - platform: rpi_gpio
+    ports:
+      24: PIR Office
+    pull_mode: "DOWN"
+    bouncetime: 250
+    invert_logic: false
+    scan_interval: 1
+  
+#Our MediaPlayers
+media_player:
+  - platform: webostv
+    host: 10.0.0.130
+    name: TV          
+  - platform: plex
+  - platform: vlc
+    name: office
+  - platform: kodi
+    name: Kitchen
+    host: http://10.0.0.103
+    username: !secret xbmc_username
+    password: !secret xbmc_password
+    port: 8080
+  - platform: kodi
+    name: iPad
+    host: http://10.0.0.113
+    username: !secret xbmc_username
+    password: !secret xbmc_password
+    port: 8080
+    
+#Our Lights
+light:
+  - platform: hue
+    host: 10.0.0.131
+    file: phue.conf
+  
+# Our Sensors 
+sensor: !include_dir_list sensors
+       
+# Our automation 
+automation: !include_dir_list automation
+
+# Our scenes 
+scene: !include_dir_list scenes
+
+# Our groups
+group: !include groups.yaml   

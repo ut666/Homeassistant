@@ -1,0 +1,8 @@
+- name: led strip cylon
+  entities:
+       light.led_strip:
+           state: on
+           transition: 50
+           brightness: 255
+           #rgb_color: [255, 0, 0]
+           effect: "sinelon"

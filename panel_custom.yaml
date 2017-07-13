@@ -1,0 +1,15 @@
+  - name: basement
+    sidebar_title: Basement
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include basement.yaml
+  - name: ground_floor
+    sidebar_title: Ground Floor
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include ground_floor.yaml
+  - name: top_floor
+    sidebar_title: Top Floor
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include top_floor.yaml

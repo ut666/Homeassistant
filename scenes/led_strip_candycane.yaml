@@ -1,0 +1,7 @@
+- name: led strip candy cane
+  entities:
+       light.led_strip:
+           state: on
+           transition: 50
+           brightness: 255
+           effect: "candy cane"

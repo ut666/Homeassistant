@@ -1,0 +1,63 @@
+#
+# iPad
+#    
+
+ipad_start_kodi:
+ alias: iPad - Start Kodi
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_unlock
+   - service: switch.turn_on
+     entity_id: script.ipad_stop_kodi
+   - service: automation.turn_on
+     entity_id: automation.ipad_play_when_ready
+   - service: switch.turn_on
+     entity_id: switch.ipad_xbmc
+
+ipad_stop_kodi:
+ alias: iPad - Stop
+ sequence:
+   - service: media_player.stop_media
+     entity_id: media_player.ipad
+     
+ipad_play_kodi:
+ alias: iPad - Play
+ sequence:
+   - service: media_player.play_media
+     data_template:
+        entity_id: media_player.ipad
+        media_content_id: >
+          {% if is_state( "input_select.ipad_media_type", "Daniel's Room" ) %}
+            !secret foscam_rtp_video_url
+          {% elif is_state( "input_select.ipad_media_type", "ChuChuTV" ) %}
+            /private/var/mobile/Library/Preferences/Kodi/userdata/playlists/video/ChuChuTV.m3u
+          {% elif is_state( "input_select.ipad_media_type", "Clocks" ) %}
+            /private/var/mobile/Library/Preferences/Kodi/userdata/playlists/video/Clocks.m3u
+          {% endif %}  
+        media_content_type: "video"            
+   - service: automation.turn_off
+     entity_id: automation.ipad_play_when_ready
+     
+ipad_volume_up:
+ alias: iPad - Volume Up
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_volume_up
+        
+ipad_volume_down:
+ alias: iPad - Volume Down
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_volume_down
+
+ipad_unlock:
+ alias: iPad - Unlock
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_unlock
+
+ipad_lock:
+ alias: iPad - Lock
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.ipad_lock

@@ -1,0 +1,165 @@
+#
+# Kitchen
+#    
+
+#Daydream
+#----------------------------
+kitchen_daydream_script:
+ alias: Kitchen - Daydream
+ sequence:
+   - service: shell_command.kitchen_enable_daydream
+   - service: shell_command.kitchen_mxplayer_kill
+   - service: shell_command.kitchen_chrome_kill
+   - service: shell_command.kitchen_youtube_kill
+   
+#Webcams
+#----------------------------
+kitchen_daniel_room_script:
+ alias: Kitchen - Watch Daniel's Room
+ sequence:
+   - service: shell_command.kitchen_disable_daydream
+   #- service: shell_command.kitchen_mxplayer_kill
+   - service: shell_command.kitchen_mxplayer_daniel
+   - service: shell_command.kitchen_chrome_kill
+   - service: shell_command.kitchen_youtube_kill
+
+kitchen_baby_room_script:
+ alias: Kitchen - Watch Baby Room
+ sequence:
+   - service: shell_command.kitchen_disable_daydream
+   #- service: shell_command.kitchen_mxplayer_kill
+   - service: shell_command.kitchen_mxplayer_baby
+   - service: shell_command.kitchen_chrome_kill
+   - service: shell_command.kitchen_youtube_kill
+ 
+#Youtube
+#----------------------------
+kitchen_chuchutv_script:
+ alias: Kitchen - Watch ChuChuTV
+ sequence:
+   - service: shell_command.kitchen_disable_daydream
+   #- service: shell_command.kitchen_youtube_kill
+   - service: shell_command.kitchen_youtube_chuchutv
+   - service: shell_command.kitchen_mxplayer_kill
+   - service: shell_command.kitchen_chrome_kill
+
+kitchen_farmees_script:
+ alias: Kitchen - Watch Farmees
+ sequence:
+   - service: shell_command.kitchen_disable_daydream
+   #- service: shell_command.kitchen_youtube_kill
+   - service: shell_command.kitchen_youtube_farmees    
+   - service: shell_command.kitchen_chrome_kill
+   - service: shell_command.kitchen_mxplayer_kill
+   - service: shell_command.kitchen_youtube_kill
+   
+kitchen_kidstv_script:
+ alias: Kitchen - Watch Kid's TV
+ sequence:
+   - service: shell_command.kitchen_disable_daydream
+   #- service: shell_command.kitchen_youtube_kill
+   - service: shell_command.kitchen_youtube_kidstv
+   - service: shell_command.kitchen_chrome_kill
+   - service: shell_command.kitchen_mxplayer_kill
+   
+kitchen_bbc_news_script:
+ alias: Kitchen - Watch BBC News
+ sequence:
+   - service: shell_command.kitchen_disable_daydream
+   #- service: shell_command.kitchen_mxplayer_kill
+   - service: shell_command.kitchen_mxplayer_bbcnews
+   - service: shell_command.kitchen_chrome_kill
+   - service: shell_command.kitchen_youtube_kill
+     
+#Web
+#----------------------------
+kitchen_hass_script:
+ alias: Kitchen - Open HASS
+ sequence:
+   - service: shell_command.kitchen_disable_daydream
+   - service: shell_command.kitchen_chrome_kill
+   - service: shell_command.kitchen_chrome_hass
+   - service: shell_command.kitchen_mxplayer_kill
+   - service: shell_command.kitchen_youtube_kill
+
+kitchen_calendar_script:
+ alias: Kitchen - Open Calendar
+ sequence:
+   - service: shell_command.kitchen_disable_daydream
+   - service: shell_command.kitchen_chrome_kill
+   - service: shell_command.kitchen_chrome_calendar
+   - service: shell_command.kitchen_write_tts
+     data_template:
+       tts_text: > 
+         Your next event is {{  states.calendar.family.attributes.message }} on {{  as_timestamp(states.calendar.family.attributes.start_time) | timestamp_custom('%A %B %-d') }}. At {{ as_timestamp(states.calendar.family.attributes.start_time) | timestamp_custom('%-I:%M %P') }}.
+   - service: shell_command.kitchen_say_tts
+   - service: shell_command.kitchen_mxplayer_kill
+   - service: shell_command.kitchen_youtube_kill
+
+#TTS announcements
+#----------------------------   
+
+kitchen_weather_script:
+ alias: Kitchen - Weather
+ sequence:
+   - service: shell_command.kitchen_write_tts
+     data_template:
+       tts_text: >
+          It is currently {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees in Grayslake. Today will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daily_high_temperature.state|round}} degrees.
+   - service: shell_command.kitchen_say_tts
+   - delay:
+       seconds: 10
+   - service: input_select.select_option
+     data:
+       entity_id: input_select.kitchen_listen_type
+       option: "None"        
+
+kitchen_time_script:
+ alias: Kitchen - Time
+ sequence:
+   - service: shell_command.kitchen_write_tts
+     data_template:
+       tts_text: >
+          The time is {{ now().strftime("%l") }} {{ now().strftime("%M") }} .
+   - service: shell_command.kitchen_say_tts
+   - delay:
+       seconds: 10
+   - service: input_select.select_option
+     data:
+       entity_id: input_select.kitchen_listen_type
+       option: "None"        
+
+kitchen_hometemp_script:
+ alias: Kitchen - Temperature
+ sequence:
+   - service: shell_command.kitchen_write_tts
+     data_template:
+       tts_text: >
+          The temperature indoors are, {{states.sensor.lennox_temperature.state|round}} degrees  for downstairs and {{states.sensor.daniel_temperature.state|round}} degrees for Daniels room
+   - service: shell_command.kitchen_say_tts
+   - delay:
+       seconds: 10
+   - service: input_select.select_option
+     data:
+       entity_id: input_select.kitchen_listen_type
+       option: "None"        
+
+kitchen_greeting_script:
+ sequence:
+   - service: shell_command.kitchen_write_tts
+     data_template:
+       tts_text: >
+          {% if now().strftime("%H")|int < 12 %}
+          Good morning.
+          {% elif now().strftime("%H")|int < 18 %}
+          Good afternoon.
+          {% else %}
+          Good evening.
+          {% endif %}
+   - service: shell_command.kitchen_say_tts
+   - delay:
+       seconds: 10
+   - service: input_select.select_option
+     data:
+       entity_id: input_select.kitchen_listen_type
+       option: "None"        

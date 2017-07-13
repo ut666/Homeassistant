@@ -1,0 +1,7 @@
+- name: led strip rainbow
+  entities:
+       light.led_strip:
+           state: on
+           transition: 50
+           brightness: 255
+           effect: "rainbow"

@@ -1,0 +1,88 @@
+
+## Play None
+- alias: Office play - None
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "None"
+  action:
+    service: media_player.media_stop
+    data:
+      entity_id: media_player.office
+
+## Play Weather script
+- alias: Office play - Weather
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Weather"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_weather_script
+        
+## Play Greeting script
+- alias: Office play - Greeting
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Greeting"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_greeting_script
+        
+## Play Daniel script
+- alias: Office play - Greeting
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Greeting"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_daniel_audio
+      
+## Play Clock script
+- alias: Office play - Clock
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Grandfather Clock"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_clock_audio
+      
+## Play Cuckoo script
+- alias: Office play - Cuckoo
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Cuckoo Clock"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_cuckoo_audio
+  
+## Play House Temp script
+- alias: Office play - Indoor Temps
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Temperature"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_hometemp_script
+      
+## Play Time script
+- alias: Office play - Time
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Time"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_time_script

@@ -1,0 +1,53 @@
+#
+# IPCAM: HallCam
+#
+hallcam_staircase_script:
+ sequence:
+   - service: switch.turn_off
+     entity_id: switch.hallcam_motion
+   - service: notify.notify
+     data:
+       message: 'HallCam moving to staircase view.'
+hallcam_door_script:
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.hallcam_motion
+   - service: notify.notify
+     data:
+       message: 'HallCam moving to front door view.'
+hallcam_diningroon_script:
+ sequence:
+   - service: switch.turn_off
+     entity_id: switch.hallcam_motion2
+   - service: notify.notify
+     data:
+       message: 'HallCam moving to dining room view.'
+hallcam_totto_script:
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.hallcam_motion2
+   - service: notify.notify
+     data:
+       message: 'HallCam moving to totto view.'
+#
+# IPCAM: BabyCam
+#
+babycam_crib_script:
+ sequence:
+   - service: switch.turn_on
+     entity_id: switch.babycam_motion
+   - service: switch.turn_on
+     entity_id: switch.babycam_zoom
+   - service: notify.notify
+     data:
+       message: 'BabyCam moving to crib view.'
+babycam_room_script:
+ sequence:
+   - service: switch.turn_off
+     entity_id: switch.babycam_zoom
+   - service: switch.turn_off
+     entity_id: switch.babycam_motion
+   - service: notify.notify
+     data:
+       message: 'BabyCam moving to room view.'
+       

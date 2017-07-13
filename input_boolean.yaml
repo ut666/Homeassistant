@@ -1,0 +1,7 @@
+enable_away:
+ name: Away Enabled
+ icon: mdi:shield-outline
+
+enable_alarm:
+ name: Alarm Enabled
+ icon: mdi:shield-outline

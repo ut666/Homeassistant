@@ -1,0 +1,88 @@
+
+## Play None
+- alias: Living Room play - None
+  trigger:
+    platform: state
+    entity_id: input_select.livingroom_media_type
+    to: "None"
+  action:
+    service: media_player.turn_off
+    data:
+      entity_id: media_player.tv
+      
+## Play Aquarium
+- alias: Living Room play - Aquarium
+  trigger:
+    platform: state
+    entity_id: input_select.livingroom_media_type
+    to: "Aquarium"
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.livingroom_aquarium
+
+## Play Fireplace
+- alias: Living Room play - Fireplace
+  trigger:
+    platform: state
+    entity_id: input_select.livingroom_media_type
+    to: "Fireplace"
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.livingroom_fireplace
+
+## Play Mountains
+- alias: Living Room play - Mountains
+  trigger:
+    platform: state
+    entity_id: input_select.livingroom_media_type
+    to: "Mountains"
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.livingroom_mountains
+
+## Play Cuckoo
+- alias: Living Room play - Cuckoo
+  trigger:
+    platform: state
+    entity_id: input_select.livingroom_media_type
+    to: "Cuckoo Clock"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.livingroom_cuckoo_audio
+
+## Play Grandfather Clock
+- alias: Living Room play - Grandfather Clock
+  trigger:
+    platform: state
+    entity_id: input_select.livingroom_media_type
+    to: "Grandfather Clock"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.livingroom_clock_audio     
+      
+## Play Daniel's Room
+- alias: Living Room play - Daniel's Room
+  trigger:
+    platform: state
+    entity_id: input_select.livingroom_media_type
+    to: "Daniel's Room"
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.livingroom_watch_daniel      
+
+## Play Baby Room
+- alias: Living Room play - Baby Room
+  trigger:
+    platform: state
+    entity_id: input_select.livingroom_media_type
+    to: "Baby Room"
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.livingroom_watch_baby   

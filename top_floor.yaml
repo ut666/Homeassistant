@@ -1,0 +1,37 @@
+      name: Top Floor
+      image: /local/custom_ui/floorplan/top_floor.svg
+      stylesheet: /local/custom_ui/floorplan/styles.css
+      warnings:
+      groups:
+         - name: Lights
+           entities:
+              - light.jeromes_light
+              - light.martas_light
+           states:
+             - state: 'on'
+               class: 'light-on'
+             - state: 'off'
+               class: 'light-off'
+         - name: Cameras
+           entities:
+             - camera.mjpeg_camera
+             - camera.foscam_camera
+           states:
+             - state: 'idle'
+               class: 'camera-idle'
+         - name: Sensors
+           entities:
+              - sensor.luka_temperature
+              - sensor.daniel_temperature
+           text_template: '${entity.state ? entity.state : "unknown"}'
+           class_template: '
+             var temp = parseFloat(entity.state.replace("°", ""));
+             if (temp < 20)
+               return "temp-very-low-background";
+             else if (temp < 23)
+               return "temp-below-average-background";
+             else if (temp < 25)
+               return "temp-average-background";
+             else
+               return "temp-very-high-background";
+             '              

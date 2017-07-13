@@ -1,0 +1,17 @@
+livingroom_clock_audio:
+ alias: Office - Clock Routine
+ sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id: media_player.shield
+        media_content_id: 'http://10.0.0.2/sounds/GFChime/GrandFatherChime{{ now().strftime("%I") }}.wav'
+        media_content_type: 'music'
+
+livingroom_cuckoo_audio:
+ alias: Office - Cuckoo Routine
+ sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id: media_player.shield
+        media_content_id: 'http://10.0.0.2/sounds/Cuckoo/cuckoo-clock-{{ now().strftime("%I") }}.wav'
+        media_content_type: 'music'

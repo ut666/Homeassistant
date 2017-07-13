@@ -1,0 +1,6 @@
+platform: speedtest
+name: "Comcast"
+monitored_conditions:
+  - ping
+  - download
+  - upload

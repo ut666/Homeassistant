@@ -1,0 +1,47 @@
+      name: Ground Floor
+      image: /local/custom_ui/floorplan/ground_floor.svg
+      stylesheet: /local/custom_ui/floorplan/styles.css
+      warnings:
+      groups:
+         - name: Lights
+           entities:
+              - light.dinning_room_light
+           states:
+             - state: 'on'
+               class: 'light-on'
+             - state: 'off'
+               class: 'light-off'
+         - name: Switches
+           entities:
+              - media_player.tv
+              - media_player.shield
+           states:
+             - state: 'off'
+               class: 'light-off'
+             - state: 'idle'
+               class: 'light-on'
+             - state: 'paused'
+               class: 'light-on'
+             - state: 'playing'
+               class: 'light-on'
+         - name: Cameras
+           entities:
+             - camera.mjpeg_camera
+           states:
+             - state: 'idle'
+               class: 'camera-idle'
+         - name: Sensors
+           entities:
+              - sensor.lennox_temperature
+           text_template: '${entity.state ? entity.state : "unknown"}'
+           class_template: '
+             var temp = parseFloat(entity.state.replace("°", ""));
+             if (temp < 20)
+               return "temp-very-low-background";
+             else if (temp < 23)
+               return "temp-below-average-background";
+             else if (temp < 25)
+               return "temp-average-background";
+             else
+               return "temp-very-high-background";
+             '              

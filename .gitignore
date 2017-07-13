@@ -1,0 +1,9 @@
+deps/
+info/
+tts/
+sounds/
+custom_components/sensor/__pycache__/
+*.db
+*.old
+*.log
+*.token

@@ -28,7 +28,7 @@ updater:
 discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+#conversation:
 
 # Enables support for tracking state changes over time.
 history:
@@ -45,59 +45,233 @@ mqtt:
    port: 1883
    client_id: hass
    keepalive: 60
- 
+
+#Our text-to-speech
+tts:
+  - platform: google
+    #language: 'en-uk'
+
+# panel_iframe:
+  # calendar:
+    # title: 'Calendar'
+    # icon: mdi:calendar
+    # url: 'http://10.0.0.2/calendarPi/index.html'
+  # forecars:
+    # title: 'Forecast'
+    # icon: mdi:weather-cloudy
+    # url: 'http://10.0.0.2/weatherPi/index.html'
+    
+# Alarm
+alarm_control_panel:
+  platform: manual
+  name: "HA Alarm"
+  code: !secret alarm_code
+#  pending_time: 45
+#  trigger_time: 45
+  disarm_after_trigger: false
+  
+# Amazon Echo
+emulated_hue:
+  type: alexa
+  expose_by_default: false
+  
 # DD-WRT Device Tracker
-#device_tracker:
-#  - platform: ddwrt
-#    host: 10.0.0.1
-#    username: !secret ddwrt_username
-#    password: !secret ddwrt_password
-#    interval_seconds: 10
-#    consider_home: 180
-#    track_new_devices: no
-
-#Bluetooth tracker
-#device_tracker:
-#   - platform: bluetooth_tracker
-
-#mqtt tracker
 device_tracker:
-  - platform: mqtt
-    devices:
-      jerome: smartthings/Jerome/presence
-      
- #IPCams
+  - platform: ddwrt
+    host: 10.0.0.1
+    username: !secret ddwrt_username
+    password: !secret ddwrt_password
+    interval_seconds: 10
+    consider_home: 180
+    track_new_devices: no
+
+# Family Calendar
+google:
+  client_id: !secret gcal_clientID
+  client_secret: !secret gcal_APIkey
+  
+# IFTTT
+ifttt:
+  key: !secret ifttt_key
+       
+# Notifications
+notify:
+  - name: pushbullet
+    platform: pushbullet
+    api_key: !secret pushbullet_key
+    
+climate:
+  - platform: lennox
+    name: iComfort
+    username: !secret lennox_username
+    password: !secret lennox_password    
+  - platform: generic_thermostat
+    name: daniel_heater
+    heater: switch.mqtt_switch
+    target_sensor: sensor.daniel_temperature
+    target_temp: 21
+    tolerance: 0.5
+    min_cycle_duration:
+      minutes: 10
+
+# IPCams
 camera:
   - platform: foscam
+    name: foscam_camera
     ip: 10.0.0.42
     username: !secret foscam_username
     password: !secret foscam_password
+  - platform: foscam
+    name: foscam2_camera
+    ip: 10.0.0.43
+    username: !secret foscam2_username
+    password: !secret foscam2_password
   - platform: mjpeg
     mjpeg_url: !secret heden_url
     username: !secret heden_username
     password: !secret heden_password
+  - platform: local_file
+    name: Office
+    file_path: /home/pi/webcam/capture.jpg    
+    
 #  - platform: synology
 #    url: https://10.0.0.3:5000/
 #    username: !secret synology_username
 #    password: !secret synology_password
 #    verify_ssl: False     
 
-#Our switches
-switch:
+android_ip_webcam:
+  - host: 10.0.0.104
+    name: Kitchen
+    motion_sensor: true
+    sensors:
+       - light
+       - motion
+    scan_interval: 1
+      
+shell_command:
+    kitchen_enable_daydream: 'ssh root@touchpad "service call dreams 1"'
+    kitchen_disable_daydream: 'ssh root@touchpad "service call dreams 2"'
+    kitchen_youtube_kill: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Stop Youtube"'
+    kitchen_mxplayer_kill: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Stop MXPlayer"'
+    kitchen_chrome_kill: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Stop Chrome"'
+    kitchen_youtube_chuchutv: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Open ChuChuTv"'
+    kitchen_youtube_farmees: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Open Farmees"'
+    kitchen_youtube_kidstv: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Open KidsTv"'
+    kitchen_mxplayer_baby: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Watch Baby"'
+    kitchen_mxplayer_daniel: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Watch Daniel"'
+    kitchen_mxplayer_bbcnews: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Watch BBC News"'
+    kitchen_chrome_hass: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Open HASS"'
+    kitchen_chrome_calendar: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Open Calendar"'
+    kitchen_write_tts: 'ssh root@touchpad "echo {{tts_text}} | tee /mnt/sdcard/scripts/tts.txt"'
+    kitchen_say_tts: 'ssh root@touchpad "sh /mnt/sdcard/scripts/tasker.sh Open Talk"'
+    kitchen_power_button: 'ssh root@touchpad "input keyevent 26"'
+    kitchen_volume_down: 'ssh root@touchpad "input keyevent 25"'
+    kitchen_volume_up: 'ssh root@touchpad "input keyevent 24"'
+    kitchen_swipe_unlock_landscape: 'ssh root@touchpad "input swipe 750 400 850 400"'
+    kitchen_start_kodi: 'ssh root@touchpad "start -n org.xbmc.kodi/org.xbmc.kodi.Splash"'
+    office_capture_webcam: '/home/pi/webcam/webcam.sh'
+    foscam_zoomin: !secret foscam_zoomin
+    foscam_zoomout: !secret foscam_zoomout
+    foscam_preset1: !secret foscam_preset1
+    foscam_preset2: !secret foscam_preset2
+    foscam_preset3: !secret foscam_preset3
+    foscam2_zoomin: !secret foscam2_zoomin
+    foscam2_zoomout: !secret foscam2_zoomout
+    foscam2_preset1: !secret foscam2_preset1
+    foscam2_preset2: !secret foscam2_preset1
+    heden_preset1: !secret heden_preset1
+    heden_preset2: !secret heden_preset2
+    heden_preset3: !secret heden_preset3
+    heden_preset4: !secret heden_preset4
+    
+#Our switches, use switches so they are alexa friendly
+switch:          
+  - platform: template
+    switches:
+      kitchen_daydream:
+        value_template: "{{states.input_select.kitchen_media_type == 'None'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script    
+      kitchen_daniel_room:
+        value_template: "{{states.input_select.kitchen_media_type == 'Daniels Room'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_daniel_room_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script    
+      kitchen_baby_room:
+        value_template: "{{states.input_select.kitchen_media_type == 'Baby Room'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_baby_room_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script    
+      kitchen_chuchutv:
+        value_template: "{{states.input_select.kitchen_media_type == 'ChuChuTV'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_chuchutv_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script     
+      kitchen_farmees:
+        value_template: "{{states.input_select.kitchen_media_type == 'Farmees'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_farmees_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script    
+      kitchen_kidstv:
+        value_template: "{{states.input_select.kitchen_media_type == 'Kids TV'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_kidstv_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script              
+      kitchen_bbcnews:
+        value_template: "{{states.input_select.kitchen_media_type == 'BBC News'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_bbc_news_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script    
+      kitchen_hass:
+        value_template: "{{states.input_select.kitchen_media_type == 'Home Assistant'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_hass_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script              
+      kitchen_calendar:
+        value_template: "{{states.input_select.kitchen_media_type == 'Calendar'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_calendar_script
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script              
+      kitchen_tts:
+        value_template: "{{states.input_select.kitchen_media_type == 'TTS'}}"
+        turn_on:
+          service: script.turn_on
+          entity_id: script.kitchen_tts
+        turn_off:
+          service: script.turn_on
+          entity_id: script.kitchen_daydream_script              
+
   - platform: command_line
     switches:
-      hallcam_motion:
-        command_on: !secret heden_preset1
-        command_off: !secret heden_preset2
-      hallcam_motion2:
-        command_on: !secret heden_preset3
-        command_off: !secret heden_preset4
-      babycam_motion:
-        command_on: !secret foscam_preset1
-        command_off: !secret foscam_preset1
-      babycam_zoom:
-        command_on: !secret foscam_zoomin
-        command_off: !secret foscam_zoomout
       jerome_laptop_lock:
         command_on: !secret office_laptop_lock
       jerome_laptop_unlock:
@@ -114,31 +288,25 @@ switch:
         command_on: 'ssh root@10.0.0.113 "activator send libactivator.audio.decrease-volume"'
       ipad_home:
         command_on: 'ssh root@10.0.0.113 "activator send libactivator.system.homebutton"'
-      kitchen_stop_daydream: 
-        command_on: 'ssh root@10.0.0.103 "service call dreams 2"'
-      kitchen_start_daydream: 
-        command_on: 'ssh root@10.0.0.103 "service call dreams 1"'
-      kitchen_power_button: 
-        command_on: 'ssh root@10.0.0.103 "input keyevent 26"'
-      kitchen_volume_down: 
-        command_on: 'ssh root@10.0.0.103 "input keyevent 25"'
-      kitchen_volume_up: 
-        command_on: 'ssh root@10.0.0.103 "input keyevent 24"'
-      kitchen_swipe_unlock: 
-        command_on: 'ssh root@10.0.0.103 "input swipe 750 400 850 400"'
-      kitchen_start_xbmc: 
-        command_on: 'ssh root@10.0.0.103 "start -n org.xbmc.kodi/org.xbmc.kodi.Splash"'
-
-#Our scripts
-script: !include scripts.yaml   
-
-#Our sliders
-input_slider: !include input_sliders.yaml
-
-#Our text-to-speech
-tts:
-  - platform: google
-    #language: 'en-uk'
+      livingroom_watch_daniel:
+        command_on: !secret autoremote_message_2
+        command_off: !secret autoremote_message_3
+      livingroom_watch_baby:
+        command_on: !secret autoremote_message_1
+        command_off: !secret autoremote_message_3
+      livingroom_aquarium:
+        command_on: !secret autoremote_message_4
+        command_off: !secret autoremote_message_3
+      livingroom_fireplace:
+        command_on: !secret autoremote_message_5
+        command_off: !secret autoremote_message_3
+      livingroom_mountains:
+        command_on: !secret autoremote_message_6
+        command_off: !secret autoremote_message_3
+        
+  - platform: mqtt
+    command_topic: "sensor/relay_01/set"
+    state_topic: "sensor/relay_01"
 
 #Our binary sensors
 binary_sensor:
@@ -149,7 +317,33 @@ binary_sensor:
     bouncetime: 250
     invert_logic: false
     scan_interval: 1
-  
+  - platform: threshold
+    name: Kitchen Motion
+    threshold: 30
+    type: upper
+    entity_id: sensor.kitchen_motion    
+    scan_interval: 1
+  - platform: mqtt
+    state_topic: dummy/floorplan/sensor
+    name: Ground Floor
+  - platform: mqtt
+    state_topic: dummy/floorplan/sensor
+    name: Top Floor  
+  - platform: mqtt
+    state_topic: dummy/floorplan/sensor
+    name: Basement    
+  - platform: template
+    sensors:
+       foscam_motion:
+          value_template: "{% if is_state('sensor.foscam_motion', '1') %}true{% else %}false{% endif %}"
+          friendly_name: 'Motion'
+       foscam2_motion:
+          value_template: "{% if is_state('sensor.foscam2_motion', '1') %}true{% else %}false{% endif %}"
+          friendly_name: 'Motion'
+       heden_motion:
+          value_template: "{% if is_state('sensor.heden_motion', '1') %}true{% else %}false{% endif %}"
+          friendly_name: 'Motion'
+    
 #Our MediaPlayers
 media_player:
   - platform: webostv
@@ -160,13 +354,13 @@ media_player:
     name: office
   - platform: kodi
     name: Kitchen
-    host: http://10.0.0.103
+    host: 10.0.0.103
     username: !secret xbmc_username
     password: !secret xbmc_password
     port: 8080
   - platform: kodi
     name: iPad
-    host: http://10.0.0.113
+    host: 10.0.0.113
     username: !secret xbmc_username
     password: !secret xbmc_password
     port: 8080
@@ -176,15 +370,70 @@ light:
   - platform: hue
     host: 10.0.0.131
     file: phue.conf
-  
+  - platform: mqtt
+    name: "dinning_room_light"
+    state_topic: "smartthings/dinning_room_light/switch"
+    command_topic: "smartthings/dinning_room_light/switch"
+    brightness_state_topic: 'smartthings/dinning_room_light/level'
+    brightness_command_topic: 'smartthings/dinning_room_light/level'
+    qos: 0
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+  - platform: mqtt_json
+    name: "LED Strip"
+    state_topic: "home/led-strip1"
+    command_topic: "home/led-strip1/set"
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane  
+      - confetti  
+      - cyclon rainbow  
+      - dots  
+      - fire  
+      - glitter  
+      - juggle  
+      - lightning
+      - noise  
+      - police all  
+      - police one  
+      - rainbow  
+      - rainbow with glitter  
+      - ripple  
+      - sinelon  
+      - solid  
+      - twinkle  
+    qos: 0  
+
+    
+#Our scripts
+script: !include_dir_merge_named scripts/
+
+#Our sliders
+input_slider: !include input_sliders.yaml
+
+#Our selects
+input_select: !include input_selects.yaml
+
+# Our input-booleans
+input_boolean: !include input_boolean.yaml
+
 # Our Sensors 
 sensor: !include_dir_list sensors
        
 # Our automation 
-automation: !include_dir_list automation
+automation: !include_dir_merge_list automation
 
 # Our scenes 
 scene: !include_dir_list scenes
 
 # Our groups
 group: !include groups.yaml   
+
+# Out custom panels
+# panel_custom: !include panel_custom.yaml

@@ -1,0 +1,41 @@
+platform: template
+sensors:
+  lennox_temperature:
+    value_template: "{{states.climate.lennox.attributes.current_temperature | float}}"
+    friendly_name: "Temperature"
+    unit_of_measurement: '°C'
+  lennox_humidity:
+    value_template: "{{states.climate.lennox.attributes.current_humidity | float}}"
+    friendly_name: "Humidity"
+    unit_of_measurement: '%'
+  lennox_status:
+    value_template: "{{states.climate.lennox.attributes.status}}"
+    friendly_name: "Status"
+  lennox_mode:
+    value_template: "{{states.climate.lennox.attributes.operation_mode}}"
+    friendly_name: "Mode"
+  lennox_fan:
+    value_template: "{{states.climate.lennox.attributes.fan_mode}}"
+    friendly_name: "Fan"
+  lennox_program:
+    value_template: "{{states.climate.lennox.attributes.program}}"
+    friendly_name: "Program"
+  lennox_away_mode:
+    value_template: "{{states.climate.lennox.attributes.away_mode| int}}"
+    friendly_name: "Away Mode"
+  lennox_heat_to:
+    value_template: "{{states.climate.lennox.attributes.target_temp_low| float}}"
+    friendly_name: "Heat-to"
+    unit_of_measurement: '°C'
+  lennox_cool_to:
+    value_template: "{{states.climate.lennox.attributes.target_temp_high| float}}"
+    friendly_name: "Cool-to"
+    unit_of_measurement: '°C'
+  lennox_range:
+    value_template: '{{ states.sensor.lennox_heat_to.state }}°C / {{ states.sensor.lennox_cool_to.state }}°C'
+    friendly_name: 'Min/Max'
+    unit_of_measurement: '' 
+  lennox_override:
+    value_template: 'If temperature is higher than {{ states.input_slider.lennox_override_high.state }}°C then reduce the cooling by {{ states.input_slider.lennox_override_temp_delta.state }}°C for {{ states.input_slider.lennox_override_time.state }} hours.'
+    friendly_name: 'Rule'
+    unit_of_measurement: '' 

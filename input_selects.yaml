@@ -1,0 +1,134 @@
+#------------
+# iPad
+#------------
+ipad_media_type:
+ name: Watch
+ options:
+   - Daniel's Room
+   - ChuChuTV
+   - Clocks Collection
+   - None
+ initial: None
+ icon: mdi:play-circle
+ 
+#------------
+# Living Room
+#------------
+livingroom_media_type:
+ name: Watch
+ options:
+   - Aquarium
+   - Fireplace
+   - Mountains
+   - Daniel's Room
+   - Baby Room
+   - Grandfather Clock
+   - Cuckoo Clock
+   - None
+ initial: None
+ icon: mdi:play-circle
+ 
+#------------
+# Office
+#------------ 
+office_listen_type:
+ name: Listen
+ options:
+   - Greeting
+   - Time
+   - Weather
+   - Temperature
+   - Calendar
+   - Grandfather Clock
+   - Cuckoo Clock
+   - Daniel's Room
+   - None
+ initial: None
+ icon: mdi:music-circle
+ 
+#------------
+# Kitchen
+#------------
+kitchen_watch_type:
+ name: Watch
+ options:
+   - Daniels Room
+   - Baby Room
+   - BBC News
+   - ChuChuTV
+   - Farmees
+   - Kids TV
+   - Calendar
+   - Home Assistant
+   - None
+ initial: None
+ icon: mdi:play-circle
+ 
+kitchen_listen_type:
+ name: Listen
+ options:
+   - Greeting
+   - Time
+   - Weather
+   - Temperature
+   - Calendar
+   - Grandfather Clock
+   - Cuckoo Clock
+   - None
+ initial: None
+ icon: mdi:music-circle
+
+#------------
+# IPCam
+#------------ 
+foscam_move_type:
+ name: Camera
+ options:
+   - Crib
+   - Room
+   - Mamaroo
+ initial: Crib
+ icon: mdi:cctv
+foscam2_move_type:
+ name: Camera
+ options:
+   - Bed
+   - Room
+ initial: Bed
+ icon: mdi:cctv
+ 
+heden_move_type:
+ name: Camera
+ options:
+   - Family Room
+   - Kitchen
+   - Balcony
+ initial: Family Room
+ icon: mdi:cctv  
+ 
+#------------
+# LED Strips
+#------------ 
+led_strip_animation:
+ name: Animation
+ options:
+   - BPM
+   - Candy cane  
+   - Confetti  
+   - Cyclon Rainbow  
+   - Dots  
+   - Fire  
+   - Glitter  
+   - Juggle  
+   - Lightning
+   - Noise  
+   - Police all  
+   - Police one  
+   - Rainbow  
+   - Rainbow with Glitter  
+   - Ripple  
+   - Sinelon  
+   - Solid  
+   - Twinkle      
+ initial: Solid
+ icon: mdi:animation  

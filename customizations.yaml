@@ -1,5 +1,58 @@
 #
 #
+#  MQTT
+#
+#
+ sensor.daniel_temperature:
+   icon: mdi:thermometer
+   hidden: false
+   friendly_name: Temperature
+ sensor.daniel_humidity:
+   icon: mdi:water-percent
+   hidden: false
+   friendly_name: Humidity
+ sensor.luka_temperature:
+   icon: mdi:thermometer
+   hidden: false
+   friendly_name: Temperature
+ sensor.luka_humidity:
+   icon: mdi:water-percent
+   hidden: false
+   friendly_name: Humidity
+   
+#
+#
+#  All Groups
+#
+#
+ group.all_switches:
+   hidden: false
+   friendly_name: Switches
+ group.all_scripts:
+   hidden: false
+   friendly_name: Scripts
+ group.all_automations:
+   hidden: false
+   friendly_name: Automations
+ group.all_lights:
+   hidden: false
+   friendly_name: Lights
+
+ binary_sensor.ground_floor:
+   custom_ui_state_card: floorplan
+   config: !include ground_floor.yaml
+   friendly_name: Ground Floor
+ binary_sensor.top_floor:
+   custom_ui_state_card: floorplan
+   config: !include top_floor.yaml   
+   friendly_name: Top Floor
+ binary_sensor.basement:
+   custom_ui_state_card: floorplan
+   config: !include basement.yaml   
+   friendly_name: Basement
+
+#
+#
 #  Templates
 #
 #
@@ -15,94 +68,8 @@
 #  Groups
 #
 #
- group.office_floor_lamps:
-   hidden: true
- group.office_ambient_lights:
-   hidden: true
  group.office_lights:
    hidden: false
-   
-#
-#  DarkSky Weather
-#
-# visible
- sensor.dark_sky_temperature:
-   hidden: false
-   friendly_name: Temperature
- sensor.dark_sky_humidity:
-   hidden: false
-   friendly_name: Humidity
- sensor.dark_sky_daily_low_temperature:
-   hidden: true
-   friendly_name: Low
- sensor.dark_sky_daily_high_temperature:
-   hidden: true
-   friendly_name: High
- sensor.dark_sky_precip_probability:
-   hidden: true
-   friendly_name: Precip. Probability
- sensor.dark_sky_precip_intensity:
-   hidden: true
-   friendly_name: Precip. Intensity
-
-# hidden
- sensor.dark_sky_hourly_summary:
-   hidden: true
-   friendly_name: Hourly Summary
- sensor.dark_sky_daily_summary:
-   hidden: true
-   friendly_name: Daily Summary
- sensor.dark_sky_icon:
-   hidden: true
-   friendly_name: Sky Icon
- sensor.dark_sky_apparent_temperature:
-   hidden: true
-   friendly_name: Apparent Temperature
- sensor.dark_sky_cloud_coverage:
-   hidden: true
-   friendly_name: Cloud Coverage
- sensor.dark_sky_daily_high_apparent_temperature:
-   hidden: true
-   friendly_name: High Apparent Temperature
- sensor.dark_sky_daily_low_apparent_temperature:
-   hidden: true
-   friendly_name: Low Apparent Temperature
- sensor.dark_sky_daily_max_precip_intensity:
-   hidden: true
-   friendly_name: Daily Max Precip. Intensity
- sensor.dark_sky_dew_point:
-   hidden: true
-   friendly_name: Dew point
- sensor.dark_sky_minutely_summary:
-   hidden: true
-   friendly_name: Minutely Summary
- sensor.dark_sky_nearest_storm_bearing:
-   hidden: true
-   friendly_name: Nearest Storm Bearing
- sensor.dark_sky_nearest_storm_distance:
-   hidden: true
-   friendly_name: Nearest Storm Distance
- sensor.dark_sky_ozone:
-   hidden: true
-   friendly_name: OZone
- sensor.dark_sky_precip:
-   hidden: true
-   friendly_name: Precipitation
- sensor.dark_sky_pressure:
-   hidden: true
-   friendly_name: Pressur
- sensor.dark_sky_summary:
-   hidden: true
-   friendly_name: Summary
- sensor.dark_sky_visibility:
-   hidden: true
-   friendly_name: Visibility
- sensor.dark_sky_wind_bearing:
-   hidden: true
-   friendly_name: Wind Bearing
- sensor.dark_sky_wind_speed:
-   hidden: true
-   friendly_name: Wind Speed
 
 #
 #  Lennox Thermostat Customizations
@@ -131,6 +98,12 @@
    icon: mdi:arrow-down
 
 #
+#  Dinning Room
+#
+ light.dinning_room_light:
+   friendly_name: Light
+
+#
 #  Office light
 #
  light.office:
@@ -149,6 +122,9 @@
 #
  camera.foscam_camera:
    hidden: false
+   friendly_name: Luka's Room
+ camera.foscam2_camera:
+   hidden: false
    friendly_name: Daniel's Room
 
 #
@@ -156,34 +132,55 @@
 #   
  camera.mjpeg_camera:
    hidden: false
-   friendly_name: Entrance
+   friendly_name: Family Room
 
 #
 #
 #  iPad Scripts
 #
 #
- script.ipad_daniel_unlock:
+ script.ipad_unlock:
    icon: mdi:lock-open
    hidden: true
- script.ipad_daniel_lock:
+ script.ipad_lock:
    icon: mdi:lock
    hidden: false
- script.ipad_daniel_volume_up:
+ script.ipad_volume_up:
    icon: mdi:volume-high
    hidden: false
- script.ipad_daniel_volume_down:
+ script.ipad_volume_down:
    icon: mdi:volume-medium
    hidden: false
- script.ipad_startup_daniel_room:
+ script.ipad_start_kodi:
    icon: mdi:play-circle
    hidden: false
- script.ipad_startup_chuchutv:
-   icon: mdi:play-circle
+ script.ipad_stop_kodi:
+   icon: mdi:stop-circle
    hidden: false
- script.ipad_startup_clock:
-   icon: mdi:play-circle
+
+#
+#  Daniel's Room Scripts
+#
+ light.led_strip:
+   emulated_hue: true
+   emulated_hue_name: "Daniels Light" 
    hidden: false
+   friendly_name: Daniel's Light
+ scene.led_strip_police:
+   emulated_hue: true
+   emulated_hue_name: "Police"
+ scene.led_strip_rainbow:
+   emulated_hue: true
+   emulated_hue_name: "Rainbow"
+ scene.led_strip_candy_cane:
+   emulated_hue: true
+   emulated_hue_name: "Candy Cane"
+ scene.led_strip_white:
+   emulated_hue: true
+   emulated_hue_name: "White Light"
+ scene.led_strip_cylon:
+   emulated_hue: true
+   emulated_hue_name: "Cylon"
 
 #
 #  Office Scripts
@@ -208,14 +205,154 @@
 #
 #  Kitchen Scripts
 #
- script.kitchen_daniel_video:
-   icon: mdi:play-circle
-   hidden: false   
- script.kitchen_greeting_script:
-   icon: mdi:voice
+ binary_sensor.kitchen_motion:
+   friendly_name: Motion
    hidden: false
-   friendly_name: Greeting 
+
+ switch.kitchen_daniel_room:
+   emulated_hue: true
+   emulated_hue_name: "Daniel Camera" 
+   friendly_name: Daniel Camera
+   hidden: false
+ switch.kitchen_baby_room:
+   emulated_hue: true
+   emulated_hue_name: "Baby Camera" 
+   friendly_name: Baby Camera
+   hidden: false
+ switch.kitchen_chuchutv:
+   emulated_hue: true
+   emulated_hue_name: "Chew Chew TV" 
+   friendly_name: ChuChuTV
+   hidden: false
+ switch.kitchen_farmees:
+   emulated_hue: true
+   emulated_hue_name: "Farmees" 
+   friendly_name: Farmees
+   hidden: false
+ switch.kitchen_kidstv:
+   emulated_hue: true
+   emulated_hue_name: "Kid's TV" 
+   friendly_name: Kid's TV
+   hidden: false
+ switch.kitchen_bbcnews:
+   emulated_hue: true
+   emulated_hue_name: "Live News" 
+   friendly_name: BBC News
+   hidden: false
+ switch.kitchen_hass:
+   emulated_hue: true
+   emulated_hue_name: "Home Assistant" 
+   friendly_name: Home Assistant
+   hidden: false
+ switch.kitchen_calendar:
+   emulated_hue: true
+   emulated_hue_name: "Calendar" 
+   friendly_name: Calendar
+   hidden: false
+ script.kitchen_hometemp_script:
+   emulated_hue: true
+   emulated_hue_name: "Temperature Status" 
+   friendly_name: Temperature Status
+   hidden: false
+ switch.kitchen_daydream:
+   emulated_hue: true
+   emulated_hue_name: "Day Dream" 
+   friendly_name: Day Dream
+   hidden: false
    
+  # switch.kitchen_power_button:
+   # icon: mdi:power
+   # hidden: false
+   # friendly_name: Power Button 
+ # switch.kitchen_volume_up:
+   # icon: mdi:volume-high
+   # hidden: false
+   # friendly_name: Volume Up 
+ # switch.kitchen_volume_down:
+   # icon: mdi:volume-medium
+   # hidden: false
+   # friendly_name: Volume Down 
+ # switch.kitchen_swipe_unlock:
+   # icon: mdi:lock-open
+   # hidden: false
+   # friendly_name: Unlock 
+ # switch.kitchen_xbmc:
+   # icon: mdi:play-circle
+   # hidden: false
+   # friendly_name: XBMC 
+ # switch.kitchen_skip_advert:
+   # emulated_hue: true
+   # emulated_hue_name: "skip advert" 
+   # icon: mdi:skip-next-circle
+   # hidden: false
+   # friendly_name: Skip Youtube Advert
+
+ climate.daniel_heater:
+   hidden: false
+   friendly_name: Daniel's Heater
+   icon: mdi:radiator
+   
+ automation.daniel__auto_cool:
+   hidden: false
+   friendly_name: Daniel's Room
+   icon: mdi:thermometer
+
+ automation.luka__auto_cool:
+   hidden: false
+   friendly_name: Luka's Room
+   icon: mdi:thermometer
+
+#
+#  Floorplan
+#  
+ group.top_floor:
+   order: "1"
+ group.ground_floor:
+   order: "5"
+ group.basement:
+   order: "2"   
+#
+#  Living Room
+#  
+ switch.livingroom_watch_baby:
+   emulated_hue: true
+   emulated_hue_name: "Baby Camera on TV" 
+   icon: mdi:play-circle
+   hidden: false
+   friendly_name: Baby Camera
+ switch.livingroom_watch_daniel:
+   emulated_hue: true
+   emulated_hue_name: "Daniel Camera on TV" 
+   icon: mdi:play-circle
+   hidden: false
+   friendly_name: Daniel Camera
+ switch.livingroom_mountains:
+   emulated_hue: true
+   emulated_hue_name: "Mountains" 
+   icon: mdi:play-circle
+   hidden: false
+   friendly_name: Mountains
+ switch.livingroom_aquarium:
+   emulated_hue: true
+   emulated_hue_name: "Aquarium" 
+   icon: mdi:play-circle
+   hidden: false
+   friendly_name: Aquarium
+ switch.livingroom_fireplace:
+   emulated_hue: true
+   emulated_hue_name: "Fireplace" 
+   icon: mdi:play-circle
+   hidden: false
+   friendly_name: Fireplace 
+ media_player.shield:
+   emulated_hue: true
+   emulated_hue_name: "Shield" 
+   friendly_name: Shield 
+ media_player.tv:
+   emulated_hue: true
+   emulated_hue_name: "TV" 
+   friendly_name: TV
+ 
 #
 #  Living Room Scripts
 #
@@ -226,6 +363,14 @@
 #
 #  IPCam Scripts
 #
+ switch.babycam_motion1:
+   icon: mdi:play-circle
+   hidden: false
+   friendly_name: Baby Crib
+ switch.babycam_motion2:
+   icon: mdi:play-circle
+   hidden: false
+   friendly_name: Mamaroo 
  script.hallcam_staircase_script:
    icon: mdi:camcorder-box
    hidden: false
@@ -438,3 +583,85 @@
    friendly_name: Wind Gust Speed kph
    icon: mdi:speedometer
    hidden: true
+ 
+#
+#  DarkSky Weather
+#
+# visible
+ sensor.dark_sky_temperature:
+   hidden: false
+   friendly_name: Temperature
+ sensor.dark_sky_humidity:
+   hidden: false
+   friendly_name: Humidity
+ sensor.dark_sky_daily_low_temperature:
+   hidden: true
+   friendly_name: Low
+ sensor.dark_sky_daily_high_temperature:
+   hidden: true
+   friendly_name: High
+ sensor.dark_sky_precip_probability:
+   hidden: true
+   friendly_name: Precip. Probability
+ sensor.dark_sky_precip_intensity:
+   hidden: true
+   friendly_name: Precip. Intensity
+
+# hidden
+ sensor.dark_sky_hourly_summary:
+   hidden: true
+   friendly_name: Hourly Summary
+ sensor.dark_sky_daily_summary:
+   hidden: true
+   friendly_name: Daily Summary
+ sensor.dark_sky_icon:
+   hidden: true
+   friendly_name: Sky Icon
+ sensor.dark_sky_apparent_temperature:
+   hidden: true
+   friendly_name: Apparent Temperature
+ sensor.dark_sky_cloud_coverage:
+   hidden: true
+   friendly_name: Cloud Coverage
+ sensor.dark_sky_daily_high_apparent_temperature:
+   hidden: true
+   friendly_name: High Apparent Temperature
+ sensor.dark_sky_daily_low_apparent_temperature:
+   hidden: true
+   friendly_name: Low Apparent Temperature
+ sensor.dark_sky_daily_max_precip_intensity:
+   hidden: true
+   friendly_name: Daily Max Precip. Intensity
+ sensor.dark_sky_dew_point:
+   hidden: true
+   friendly_name: Dew point
+ sensor.dark_sky_minutely_summary:
+   hidden: true
+   friendly_name: Minutely Summary
+ sensor.dark_sky_nearest_storm_bearing:
+   hidden: true
+   friendly_name: Nearest Storm Bearing
+ sensor.dark_sky_nearest_storm_distance:
+   hidden: true
+   friendly_name: Nearest Storm Distance
+ sensor.dark_sky_ozone:
+   hidden: true
+   friendly_name: OZone
+ sensor.dark_sky_precip:
+   hidden: true
+   friendly_name: Precipitation
+ sensor.dark_sky_pressure:
+   hidden: true
+   friendly_name: Pressure
+ sensor.dark_sky_summary:
+   hidden: true
+   friendly_name: Summary
+ sensor.dark_sky_visibility:
+   hidden: true
+   friendly_name: Visibility
+ sensor.dark_sky_wind_bearing:
+   hidden: true
+   friendly_name: Wind Bearing
+ sensor.dark_sky_wind_speed:
+   hidden: true
+   friendly_name: Wind Speed   

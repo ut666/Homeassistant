@@ -5,12 +5,12 @@
 #Lock/Unlock the PC
 #----------------------------
 office_lock_pc:
- alias: Lock PC
+ alias: Office - Lock PC
  sequence:
    - service: switch.turn_on
      entity_id: switch.jerome_laptop_lock
 office_unlock_pc:
- alias: Unlock PC
+ alias: Office - Unlock PC
  sequence:
    - service: switch.turn_on
      entity_id: switch.jerome_laptop_unlock
@@ -29,6 +29,7 @@ office_daniel_audio:
 #TTS announcements
 #----------------------------
 office_weather_script:
+ alias: Office - Weather Announcement
  sequence:
    - service: tts.google_say
      data_template:
@@ -36,6 +37,7 @@ office_weather_script:
        message: >
           It's currently {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees in Grayslake. Today will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, with a high of {{states.sensor.dark_sky_daily_high_temperature.state|round}} degrees.
 office_time_script:
+ alias: Office - Time Announcement
  sequence:
    - service: tts.google_say
      data_template:
@@ -43,6 +45,7 @@ office_time_script:
        message: >
           The time is {{ now().strftime("%l") }} {{ now().strftime("%M") }} .
 office_hometemp_script:
+ alias: Office - Home Temp Announcement
  sequence:
    - service: tts.google_say
      data_template:
@@ -50,6 +53,7 @@ office_hometemp_script:
        message: >
           The temperature indoors are, {{states.sensor.lennox_temperature.state|round}} degrees for downstairs and {{states.sensor.daniel_temperature.state|round}} degrees for Daniel's room.         
 office_greeting_script:
+ alias: Office - Greeting
  sequence:
    - service: tts.google_say
      data_template:
@@ -87,14 +91,14 @@ office_empty_script:
  alias: Office - Empty Routine
  sequence:
    - service: light.turn_off
-     entity_id: group.office   
+     entity_id: group.office_light   
    - service: switch.turn_on
      entity_id: switch.jerome_laptop_lock          
 office_entrance_script:
  alias: Office - Entrance Routine
  sequence:
    - service: light.turn_on
-     entity_id: group.office   
+     entity_id: group.office_light   
    - service: switch.turn_on
      entity_id: switch.jerome_laptop_unlock     
    - service: script.turn_on

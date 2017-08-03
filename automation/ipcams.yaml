@@ -1,0 +1,93 @@
+## ------------------
+## IPCAM - DanCam
+## ------------------
+
+## DanCam - Bed
+- alias: IPCam - DanCam Move to Bed
+  trigger:
+    platform: state
+    entity_id: input_select.foscam2_move_type
+    to: "Bed"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.dancam_bed_script
+
+## DanCam - Room
+- alias: IPCam - DanCam Move to Room
+  trigger:
+    platform: state
+    entity_id: input_select.foscam2_move_type
+    to: "Room"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.dancam_room_script
+
+## ------------------
+## IPCAM - BabyCam
+## ------------------
+
+## BabyCam - Crib
+- alias: IPCam - BabyCam Move to Crib
+  trigger:
+    platform: state
+    entity_id: input_select.foscam_move_type
+    to: "Crib"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.babycam_crib_script
+
+## BabyCam - Mamaroo
+- alias: IPCam - BabyCam Move to Mamaroo
+  trigger:
+    platform: state
+    entity_id: input_select.foscam_move_type
+    to: "Mamaroo"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.babycam_mamaroo_script
+      
+## BabyCam - Room
+- alias: IPCam - BabyCam Move to Room
+  trigger:
+    platform: state
+    entity_id: input_select.foscam_move_type
+    to: "Room"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.babycam_room_script
+
+## ------------------
+## IPCAM - Heden
+## ------------------
+
+## Heden - Kitchen
+- alias: IPCam - Heden Move to Kitchen
+  trigger:
+    platform: state
+    entity_id: input_select.heden_move_type
+    to: "Kitchen"
+  action:
+    service: shell_command.heden_preset2
+
+## Heden - Family Room
+- alias: IPCam - Heden Move to Family Room
+  trigger:
+    platform: state
+    entity_id: input_select.heden_move_type
+    to: "Family Room"
+  action:
+    service: shell_command.heden_preset3
+      
+## Heden - Balcony
+- alias: IPCam - Heden Move to Balcony
+  trigger:
+    platform: state
+    entity_id: input_select.heden_move_type
+    to: "Balcony"
+  action:
+    service: shell_command.heden_preset4

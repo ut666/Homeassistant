@@ -1,0 +1,182 @@
+
+#----------------------
+#Presence
+#----------------------
+
+#Enter Room
+- alias: Office - Turn on light and greet when office senses motion
+  trigger:
+     platform: state
+     entity_id: binary_sensor.pir_office
+     to: 'on'
+  condition:
+     condition: and
+     conditions:
+       - condition: state
+         entity_id: 'group.office_light'
+         state: 'off'
+  action:
+     service: script.turn_on
+     entity_id: script.office_entrance_script
+     
+#Empty Room
+- alias: Office - Turn off light when offices senses no motion for 1 hr
+  trigger:
+    platform: state
+    entity_id: binary_sensor.pir_office
+    to: 'off'
+    # Will trigger when state has been the to state for X time.
+    for:
+       minutes: 15
+  action:
+    service: script.turn_on
+    entity_id: script.office_empty_script
+    
+#Wecam on motion detected
+- alias: Office - Capture webcam when office senses motion
+  trigger:
+    platform: state
+    entity_id: binary_sensor.pir_office
+    to: 'on'
+  action:
+    service: shell_command.office_capture_webcam
+
+#----------------------
+# Lights Sliders
+#----------------------
+
+- alias: Office - Lamp Set Brightness
+  trigger:
+    platform: state
+    entity_id: input_slider.office_lamp
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.office_lamp
+      brightness: '{{ states.input_slider.office_lamp.state | int }}'
+
+- alias: "Office - Lamp Get Brightness"
+  trigger:
+    platform: numeric_state
+    entity_id: light.office_lamp
+    value_template: "{{ states.light.office_lamp.attributes.brightness | int }}"
+    above: -1
+  action:
+    service: input_slider.select_value
+    data_template:
+       entity_id: input_slider.office_lamp
+       value: "{{ states.light.office_lamp.attributes.brightness | int }}"
+
+- alias: Office - Ambient Set Brightness
+  trigger:
+    platform: state
+    entity_id: input_slider.office_ambient
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.office_ambient
+      brightness: '{{ states.input_slider.office_ambient.state  | int }}'
+
+- alias: "Office - Ambient Get Brightness"
+  trigger:
+    platform: numeric_state
+    entity_id: light.office_ambient
+    value_template: "{{ states.light.office_ambient.attributes.brightness | int }}"
+    above: -1
+  action:
+    service: input_slider.select_value
+    data_template:
+       entity_id: input_slider.office_ambient
+       value: "{{ states.light.office_ambient.attributes.brightness | int }}"
+      
+#----------------------
+# Media Player
+#----------------------
+
+## Play None
+- alias: Office - Play None
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "None"
+  action:
+    service: media_player.media_stop
+    data:
+      entity_id: media_player.office
+
+## Play Weather script
+- alias: Office - Play Weather
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Weather"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_weather_script
+        
+## Play Greeting script
+- alias: Office - Play Greeting
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Greeting"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_greeting_script
+        
+## Play Daniel script
+- alias: Office - Play Daniels Audio
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Daniel's Room"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_daniel_audio
+      
+## Play Clock script
+- alias: Office - Play Clock
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Grandfather Clock"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_clock_audio
+      
+## Play Cuckoo script
+- alias: Office - Play Cuckoo
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Cuckoo Clock"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_cuckoo_audio
+  
+## Play House Temp script
+- alias: Office - Play Indoor Temps
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Temperature"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_hometemp_script
+      
+## Play Time script
+- alias: Office - Play Time
+  trigger:
+    platform: state
+    entity_id: input_select.office_listen_type
+    to: "Time"
+  action:
+    service: script.turn_on
+    data:
+      entity_id: script.office_time_script

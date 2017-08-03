@@ -1,7 +1,3 @@
-enable_away:
- name: Away Enabled
- icon: mdi:shield-outline
-
-enable_alarm:
- name: Alarm Enabled
- icon: mdi:shield-outline
+lennox_override:
+ name: Override Mode
+ icon: mdi:lock-reset

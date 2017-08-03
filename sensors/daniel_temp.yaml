@@ -1,0 +1,6 @@
+platform: mqtt
+name: "daniel_temperature"
+state_topic: "sensor/daniel_temperature"
+qos: 0
+unit_of_measurement: "°C"
+value_template: '{{ value | round(1) }}'

@@ -1,0 +1,5 @@
+- name: Office Soft Off
+  entities:
+       group.office_lights:
+           state: off
+           transition: 5

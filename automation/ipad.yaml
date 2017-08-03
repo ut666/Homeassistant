@@ -1,0 +1,10 @@
+-  alias: iPad - Play When Ready
+   initial_state: False
+   trigger:
+      platform: state
+      entity_id: media_player.ipad
+      to: 'idle'
+   action:
+      service: script.turn_on
+      entity_id: script.ipad_play_kodi
+     

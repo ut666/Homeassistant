@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Stop HASS
+sudo systemctl stop home-assistant@pi
+# Activate the virtualenv
+source /srv/homeassistant/homeassistant_venv/bin/activate
+# Install Home Assistant
+sudo pip3 install --upgrade homeassistant
+exit
+EOF
+
+# Restart Home Assistant
+sudo systemctl restart home-assistant@pi

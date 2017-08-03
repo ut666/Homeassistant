@@ -1,6 +1,6 @@
 
 ## Play None
-- alias: Kitchen play - None
+- alias: Kitchen - Play None
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -10,11 +10,25 @@
     data:
       entity_id: script.kitchen_daydream_script
 
+#--------------
+# Media Player
+#--------------
+-  alias: Kitchen - Play When Ready
+   initial_state: False
+   trigger:
+      platform: state
+      entity_id: media_player.kitchen
+      to: 'idle'
+   action:
+      service: script.turn_on
+      entity_id: script.kitchen_play_kodi      
+
+#--------------
 # Webcam feeds
 #--------------
 
 ## Play Daniel's Room
-- alias: Kitchen play - Daniel's Room
+- alias: Kitchen - Play Daniel's Room
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -25,7 +39,7 @@
       entity_id: script.kitchen_daniel_room_script
 
 ## Play Baby's Room
-- alias: Kitchen play - Baby's Room
+- alias: Kitchen - Play Baby's Room
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -35,11 +49,12 @@
     data:
       entity_id: script.kitchen_baby_room_script
 
+#--------------
 # Youtube feeds
 #--------------
 
 ## Play ChuChuTV
-- alias: Kitchen play - ChuChuTV
+- alias: Kitchen - Play ChuChuTV
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -50,7 +65,7 @@
       entity_id: script.kitchen_chuchutv_script
 
 ## Play Farmees
-- alias: Kitchen play - Farmees
+- alias: Kitchen - Play Farmees
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -61,7 +76,7 @@
       entity_id: script.kitchen_farmees_script
 
 ## Play Kid's TV
-- alias: Kitchen play - Kid's TV
+- alias: Kitchen - Play Kid's TV
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -72,7 +87,7 @@
       entity_id: script.kitchen_kidstv_script
 
 ## Play BBC News
-- alias: Kitchen play - BBC News
+- alias: Kitchen - Play BBC News
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -82,11 +97,12 @@
     data:
       entity_id: script.kitchen_bbc_news_script
       
+#--------------
 # Web feeds
 #--------------
      
 ## Open Home Assistant
-- alias: Kitchen open - Home Assistant
+- alias: Kitchen - Open Home Assistant
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -97,7 +113,7 @@
       entity_id: script.kitchen_hass_script
      
 ## Open Calendar
-- alias: Kitchen open - Calendar
+- alias: Kitchen - Open Calendar
   trigger:
     platform: state
     entity_id: input_select.kitchen_watch_type
@@ -107,11 +123,12 @@
     data:
       entity_id: script.kitchen_calendar_script
 
+#--------------
 # TTS
 #--------------
 
 ## Play Weather script
-- alias: Kitchen play - Weather
+- alias: Kitchen - Play Weather
   trigger:
     platform: state
     entity_id: input_select.kitchen_listen_type
@@ -122,7 +139,7 @@
       entity_id: script.kitchen_weather_script
 
 ## Play Greeting script
-- alias: Kitchen play - Greeting
+- alias: Kitchen - Play Greeting
   trigger:
     platform: state
     entity_id: input_select.kitchen_listen_type
@@ -133,7 +150,7 @@
       entity_id: script.kitchen_greeting_script
      
 ## Play House Temp script
-- alias: Kitchen play - Indoor Temps
+- alias: Kitchen - Play Indoor Temps
   trigger:
     platform: state
     entity_id: input_select.kitchen_listen_type
@@ -144,7 +161,7 @@
       entity_id: script.kitchen_hometemp_script
 
 ## Play Time script
-- alias: Kitchen play - Time
+- alias: Kitchen - Play Time
   trigger:
     platform: state
     entity_id: input_select.kitchen_listen_type
@@ -153,3 +170,24 @@
     service: script.turn_on
     data:
       entity_id: script.kitchen_time_script
+      
+#--------------
+# Audio
+#--------------
+
+- alias: 'Kitchen - Grandfather Clock'
+  initial_state: true
+  trigger:
+    platform: time
+    minutes: 00
+    seconds: 00
+  condition:
+    condition: time
+    after: '05:30:00'
+    before: '23:30:00'
+  action:
+    service: media_player.play_media
+    data_template:
+      entity_id: media_player.kitchen
+      media_content_id: '/mnt/shell/emulated/0/GFChime/GrandFatherChime{{ now().strftime("%I") }}.wav'
+      media_content_type: 'music'

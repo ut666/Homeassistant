@@ -33,6 +33,8 @@
          - name: Sensors
            entities:
               - sensor.lennox_temperature
+              - sensor.lennox_heat_to
+              - sensor.lennox_cool_to
            text_template: '${entity.state ? entity.state : "unknown"}'
            class_template: '
              var temp = parseFloat(entity.state.replace("°", ""));
@@ -45,3 +47,12 @@
              else
                return "temp-very-high-background";
              '              
+         - name: Binary Sensors
+           entities:
+             - binary_sensor.kitchen_motion
+             - binary_sensor.heden_motion
+           states:
+             - state: 'off'
+               class: 'info-background'
+             - state: 'on'
+               class: 'warning-background'

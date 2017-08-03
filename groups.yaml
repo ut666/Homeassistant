@@ -1,3 +1,6 @@
+#---------------
+# Weather
+#---------------
 weather:
    name: Weather
    entities:
@@ -7,87 +10,403 @@ weather:
       - sensor.weather_precip
       - sensor.dark_sky_humidity
       - sensor.PWS_uv
-
-
+      
+#---------------
+# Thermostat
+#---------------      
 thermostat:
    name: Thermostat
    entities:
+      #- climate.lennox
       - sensor.lennox_temperature
-      - sensor.lennox_range
       - sensor.lennox_humidity
       - sensor.lennox_status
+      #- sensor.lennox_mode
+      #- sensor.lennox_fan
+      - input_slider.lennox_coolto
+      - sensor.lennox_cool_to
+      - input_slider.lennox_heatto
+      - sensor.lennox_heat_to
+      #- sensor.lennox_range
 
-living_room:
+#---------------
+# Thermostat - Automations
+#---------------      
+thermostat_automations:
+   name: AC Automation
+   entities:
+      - sensor.lennox_override     
+      - input_slider.lennox_override_time
+      - input_slider.lennox_override_temp_delta
+      - input_slider.lennox_override_high
+      - input_slider.lennox_override_low
+      
+#---------------
+# Thermostat - Automation Sensors
+#---------------      
+thermostat_sensors:
+   name: Thermostat Sensors
+   control: hidden
+   entities:
+      - sensor.lennox_override     
+      - automation.daniel__auto_cool
+      - automation.luka__auto_cool
+      
+#---------------
+# Lights
+#---------------      
+lights_overview:
+   name: All Lights
+   control: hidden
+   entities: 
+      - group.all_lights
+#      - light.dinning_room_light
+#      - light.jeromes_light
+#      - light.martas_light
+#      - light.luka_ambient
+#      - light.led_strip
+#      - light.office_lamp
+#      - light.office_ambient
+
+#---------------
+# Luka
+#---------------
+
+luka_overview:
+   name: Luka's Room
+   entities:
+      - light.luka_ambient
+      - sensor.luka_temperature
+      - sensor.luka_humidity
+      - camera.foscam_camera
+      - binary_sensor.foscam_motion
+      - input_select.foscam_move_type
+
+luka_climate:
+   name: Luka's Room
+   entities:
+      - sensor.luka_temperature
+      - sensor.luka_humidity
+
+luka_security:
+   name: Luka's Room
+   entities:
+      - camera.foscam_camera
+      - binary_sensor.foscam_motion
+      - input_select.foscam_move_type
+
+luka_light:
+   name: Luka's Room
+   entities:
+      - light.luka_ambient
+
+#---------------
+# Daniel
+#---------------
+
+daniel_overview:
+   name: Daniel's Room
+   entities:
+      - sensor.daniel_temperature
+      - sensor.daniel_humidity
+      - camera.foscam2_camera
+      - binary_sensor.foscam2_motion
+      - input_select.foscam2_move_type
+
+daniel_climate:
+   name: Daniel's Room
+   entities:
+      - sensor.daniel_temperature
+      - sensor.daniel_humidity
+      - climate.daniel_heater
+
+daniel_security:
+   name: Daniel's Room
+   entities:
+      - camera.foscam2_camera
+      - binary_sensor.foscam2_motion
+      - input_select.foscam2_move_type
+           
+#---------------
+# Bedroom
+#---------------
+
+bedroom_overview:
+   name: Bedroom
+   control: hidden
+   entities:
+      - light.jeromes_light
+      - light.martas_light
+
+bedroom_light:
+   name: Bedroom
+   entities:
+      - light.jeromes_light
+      - input_slider.jeromes_light      
+      - light.martas_light
+      - input_slider.martas_light
+
+#---------------
+# Family Room
+#---------------
+family_room_overview:
+   name: Family Room
+   control: hidden
+   entities:
+      - light.led_strip
+      - camera.mjpeg_camera
+      - binary_sensor.heden_motion
+      - input_select.heden_move_type
+
+family_room_security:
+   name: Family Room
+   control: hidden
+   entities:
+      - camera.mjpeg_camera
+      - binary_sensor.heden_motion
+      - input_select.heden_move_type
+      
+family_room_light:
+   name: Family Room
+   entities:
+      - light.led_strip
+      - input_slider.led_strip
+      - input_slider.led_strip_speed
+      - input_select.led_strip_animation
+      
+#---------------
+# Dinning Room
+#---------------
+      
+dining_room_overview:
+   name: Dining Room
+   control: hidden
+   entities:
+      - light.dinning_room_light
+      
+dining_room_light:
+   name: Dining Room
+   control: hidden
+   entities:
+      - light.dinning_room_light
+
+#---------------
+# Living Room
+#---------------
+      
+living_room_media:
    name: Living Room
    control: hidden
    entities:
-      - script.shield_greeting_script
+      - input_select.livingroom_media_type
+      - media_player.shield
+      - media_player.tv
+      
+#---------------
+# Kitchen
+#---------------
 
-camera:
-   name: Camera Presets
-   control: hidden
-   entities:
-      - script.hallcam_staircase_script
-      - script.hallcam_door_script
-      - script.hallcam_diningroon_script
-      - script.hallcam_totto_script
-      - script.babycam_crib_script
-      - script.babycam_room_script
-
-kitchen:
+kitchen_overview:
    name: Kitchen
    control: hidden
    entities:
-      - script.kitchen_greeting_script
-      - script.kitchen_daniel_audio
-      - script.kitchen_daniel_video
-      - media_player.kitchen
-      
-ipad:
+       - input_select.kitchen_watch_type
+       - input_select.kitchen_listen_type
+       - binary_sensor.kitchen_motion
+
+kitchen_security:
+   name: Kitchen
+   control: hidden
+   entities:
+       - camera.kitchen
+       - binary_sensor.kitchen_motion
+
+kitchen_media:
+   name: Kitchen
+   control: hidden
+   entities:
+       - input_select.kitchen_watch_type
+       - input_select.kitchen_listen_type
+       
+#---------------
+# Ipad
+#---------------
+ipad_media:
    name: Daniel's iPad
    control: hidden
    entities:
-      - script.ipad_startup_daniel_room
-      - script.ipad_startup_chuchutv
-      - script.ipad_startup_clock
-      - script.ipad_daniel_lock
-      - script.ipad_daniel_volume_up
-      - script.ipad_daniel_volume_down
+      - input_select.ipad_media_type
+#      - script.ipad_lock
+      - script.ipad_volume_up
+      - script.ipad_volume_down
       - media_player.ipad
- 
-office_floor_lamps:
-   name: Floor Lamps
-   entities:
-      - light.floor_lamp_1
-      - light.floor_lamp_2
 
-office_ambient_lights:
-   name: Ambient Lights
-   entities:
-      - light.ambient_light_1
-      - light.ambient_light_2
+#---------------
+# Office
+#---------------      
       
-office_lights:
-   name: Office Lights
-   entities:
-      - light.floor_lamp_1
-      - light.floor_lamp_2
-      - input_slider.office_floor_lamps
-      - light.ambient_light_1
-      - light.ambient_light_2
-      - input_slider.office_ambient_lights
-      
-office:
+office_overview:
    name: Office
    control: hidden
    entities:
-      - group.office_lights
-      - group.office_floor_lamps
-      - group.office_ambient_lights
-      - script.office_entrance_script
-      - script.office_daniel_audio
+      - light.office_lamp
+      - light.office_ambient
+      - binary_sensor.pir_office
+
+office_light:
+   name: Office
+   entities:
+      - light.office_lamp
+      - input_slider.office_lamp
+      - light.office_ambient
+      - input_slider.office_ambient
+      - switch.mqtt_switch
+      
+office_security:
+   name: Office
+   control: hidden
+   entities:
+      - camera.office
       - binary_sensor.pir_office
       - script.office_lock_pc
       - script.office_unlock_pc
+
+office_media:
+   name: Office
+   control: hidden
+   entities:
+      - input_select.office_listen_type
       - media_player.office
+      
+#---------------
+# Alarm
+#---------------      
+      
+status:
+   name: Status
+   control: hidden
+   entities:
+      - device_tracker.jerome_phone
+      - device_tracker.marta_phone
+      - alarm_control_panel.ha_alarm
+
+#---------------
+# Network
+#---------------      
+
+synology:
+   name: Servers
+   control: hidden
+   entities:
+      - sensor.synology_ds409
+      - sensor.synology_ds916
+
+internet:
+   name: Internet
+   control: hidden
+   entities:
+      - sensor.speedtest_ping
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      
+#---------------
+# Floorplan
+#---------------            
+
+top_floor:
+   name: Top Floor
+   entities:
+      - binary_sensor.top_floor   
+
+ground_floor:
+   name: Ground Floor
+   entities:
+      - binary_sensor.ground_floor
+
+basement:
+   name: Basement
+   entities:
+      - binary_sensor.basement
+
+#---------------
+#   VIEWS
+#---------------  
+      
+default_view:
+   name: Overview
+   view: yes
+   entities:
+      - group.status
+      - group.bedroom_overview
+      - group.office_overview
+      - group.dining_room_overview
+      - group.daniel_overview
+      - group.luka_overview
+      - group.family_room_overview
+      
+climate:
+   name: Climate
+   view: yes
+   entities:
+      - group.weather
+      - group.thermostat
+      - group.thermostat_sensors
+      - group.daniel_climate
+      - group.luka_climate
+      
+lights:
+   name: Lights
+   view: yes
+   entities:
+      #- group.lights_overview
+      - group.luka_light
+      - group.bedroom_light
+      - group.family_room_light
+      - group.dining_room_light
+      - group.office_light
+
+security:
+   name: Security
+   view: yes
+   entities:
+      - group.status
+      - group.luka_security
+      - group.daniel_security
+      - group.family_room_security
+      - group.kitchen_security
+      - group.office_security
+      
+media:
+   name: Media
+   view: yes
+   entities:
+      - group.kitchen_media
+      - group.office_media
+      - group.living_room_media
+      - group.ipad_media
+
+floorplan:
+   name: Floorplan
+   view: yes
+   entities:
+      - group.top_floor
+      - group.ground_floor
+      - group.basement
+
+network:
+   name: Network
+   view: yes
+   entities:
+      - group.internet
+      - group.synology
+      
+system:
+   name: System
+   view: yes
+   entities:
+      - updater.updater
+      - group.all_scripts
+      - group.all_switches
+      - group.all_automations
+      - group.thermostat_automations
       

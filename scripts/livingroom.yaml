@@ -1,5 +1,5 @@
 livingroom_clock_audio:
- alias: Office - Clock Routine
+ alias: Living Room - Clock Routine
  sequence:
     - service: media_player.play_media
       data_template:
@@ -8,7 +8,7 @@ livingroom_clock_audio:
         media_content_type: 'music'
 
 livingroom_cuckoo_audio:
- alias: Office - Cuckoo Routine
+ alias: Living Room - Cuckoo Routine
  sequence:
     - service: media_player.play_media
       data_template:

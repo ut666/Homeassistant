@@ -10,7 +10,7 @@ ipad_start_kodi:
    - service: switch.turn_on
      entity_id: script.ipad_stop_kodi
    - service: automation.turn_on
-     entity_id: automation.ipad_play_when_ready
+     entity_id: automation.ipad__play_when_ready
    - service: switch.turn_on
      entity_id: switch.ipad_xbmc
 
@@ -36,7 +36,7 @@ ipad_play_kodi:
           {% endif %}  
         media_content_type: "video"            
    - service: automation.turn_off
-     entity_id: automation.ipad_play_when_ready
+     entity_id: automation.ipad__play_when_ready
      
 ipad_volume_up:
  alias: iPad - Volume Up

@@ -1,0 +1,6 @@
+- name: Office Soft On
+  entities:
+       group.office_lights:
+           state: on
+           transition: 5
+           brightness: 255

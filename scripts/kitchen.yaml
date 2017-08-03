@@ -24,7 +24,7 @@ kitchen_daniel_room_script:
    - service: shell_command.kitchen_youtube_kill
 
 kitchen_baby_room_script:
- alias: Kitchen - Watch Baby Room
+ alias: Kitchen - Watch Luka's Room
  sequence:
    - service: shell_command.kitchen_disable_daydream
    #- service: shell_command.kitchen_mxplayer_kill
@@ -145,6 +145,7 @@ kitchen_hometemp_script:
        option: "None"        
 
 kitchen_greeting_script:
+ alias: Kitchen - Greeting
  sequence:
    - service: shell_command.kitchen_write_tts
      data_template:

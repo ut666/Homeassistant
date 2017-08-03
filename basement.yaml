@@ -13,10 +13,16 @@
                class: 'warning-background'
          - name: Lights
            entities:
-              - light.office
+              - light.office_lamp
               - light.office_ambient
            states:
              - state: 'on'
                class: 'light-on'
              - state: 'off'
                class: 'light-off'
+         - name: Cameras
+           entities:
+             - camera.office
+           states:
+             - state: 'idle'
+               class: 'camera-idle'

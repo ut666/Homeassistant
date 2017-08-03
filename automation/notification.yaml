@@ -1,0 +1,16 @@
+-  alias: Notification - Daniel's Room Temperature
+   trigger:
+     platform: numeric_state
+     entity_id: sensor.daniel_temperature
+     below: 20.5
+     above: 24.0
+   action:
+     - service: notify.pushbullet
+       data_template:
+         title: "Daniel's Room"
+         message: >
+          Warning tempereature is {{states.sensor.daniel_temperature.state}}.
+         target: 
+          - device/htc10
+          - device/jerome_chrome
+     - delay: 0:30

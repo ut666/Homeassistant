@@ -1,0 +1,13 @@
+- alias: "Luka - Auto Cool"
+  trigger:
+     platform: template
+     value_template: '{{ states.sensor.luka_temperature.state | float > states.input_slider.lennox_override_high.state | float}}'    
+  condition:
+     #Only allow one active over-ride at a time
+     condition: state
+     entity_id: input_boolean.lennox_override
+     state: 'off'      
+  action:
+    service: script.turn_on
+    entity_id: script.lennox_coolto_override
+    

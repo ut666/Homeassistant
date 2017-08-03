@@ -1,0 +1,4 @@
+platform: command_line
+name: "foscam2_motion"
+command: !secret foscam2_motion
+scan_interval: 2

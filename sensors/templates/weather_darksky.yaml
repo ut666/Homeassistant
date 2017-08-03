@@ -8,7 +8,3 @@ sensors:
      value_template: '{{ states.sensor.dark_sky_precip_probability.state }}% ({{ states.sensor.dark_sky_precip_intensity.state }}mm)'
      friendly_name: 'Precipitation'
      unit_of_measurement: ''
-   lennox_range:
-     value_template: '{{ states.sensor.lennox_cool_to.state }}°C / {{ states.sensor.lennox_heat_to.state }}°C'
-     friendly_name: 'Cool/Heat'
-     unit_of_measurement: '' 

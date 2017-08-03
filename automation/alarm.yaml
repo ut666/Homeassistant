@@ -1,0 +1,51 @@
+
+## Turn on away mode if everyone is NOT HOME
+- alias: "Alarm - Enable Away Mode on NOT HOME"
+  trigger:
+     platform: state
+     entity_id:  group.all_devices
+     #device_tracker.jerome_phone
+     from: 'home'
+     to: 'not_home'
+  action:
+     service: alarm_control_panel.alarm_arm_away
+     entity_id: alarm_control_panel.ha_alarm
+     data:
+       code: !secret alarm_code
+
+## Turn off away mode if everyone is HOME
+- alias: "Alarm - Disable Away Mode on HOME"
+  trigger:
+     platform: state
+     entity_id:  group.all_devices
+     from: 'not_home'
+     to: 'home'
+  action:
+     service: alarm_control_panel.alarm_disarm
+     entity_id: alarm_control_panel.ha_alarm
+     data:
+       code: !secret alarm_code
+## Lights off on Away Mode
+- alias: "Alarm - Turn off all lights on Away mode"
+  trigger:
+     platform: state
+     entity_id: alarm_control_panel.ha_alarm
+     from: 'disarmed'
+     to: 'armed_away'
+  action:
+     service: light.turn_off
+     entity_id: group.all_lights
+
+## Triggers whilst Armed
+- alias: 'Alarm - Trigger while armed away'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.pir_office
+      to: 'active'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_away
+  action:
+    service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm

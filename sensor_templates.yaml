@@ -1,0 +1,19 @@
+#
+# Sensor Value Templating; delete if you already are using templates; just
+# add the templates underneath your existing ones in proper format
+#
+#
+   -  platform: template
+      sensors:
+         sensor.PWS_temp_c:
+            value_template: '{{ states.sensor.weather_underground_pws.attributes.temp_c }}'
+         sensor.PWS_feelslike_c:
+            value_template: '{{ states.sensor.weather_underground_pws.attributes.feelslike_c }}'
+         sensor.PWS_relative_humidity:
+            value_template: '{{ states.sensor.weather_underground_pws.attributes.relative_humidity }}'
+         sensor.PWS_precip_today_metric:
+            value_template: '{{ states.sensor.weather_underground_pws.attributes.precip_today_metric }}'
+         sensor.PWS_uv:
+            value_template: '{{ states.sensor.weather_underground_pws.attributes.uv }}'
+         sensor.PWS_wind_kph:
+            value_template: '{{ states.sensor.weather_underground_pws.attributes.wind_kph }}'

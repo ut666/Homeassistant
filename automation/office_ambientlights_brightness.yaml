@@ -1,9 +1,0 @@
-alias: Office Ambient Lights - Adjust Brightness
-trigger:
-  platform: state
-  entity_id: input_slider.office_ambient_lights
-action:
-  service: light.turn_on
-  data_template:
-    entity_id: group.office_ambient_lights
-    brightness: '{{ trigger.to_state.state | int }}'

@@ -1,6 +1,6 @@
 
 ## Play None
-- alias: Living Room play - None
+- alias: Living Room - Play None
   trigger:
     platform: state
     entity_id: input_select.livingroom_media_type
@@ -11,7 +11,7 @@
       entity_id: media_player.tv
       
 ## Play Aquarium
-- alias: Living Room play - Aquarium
+- alias: Living Room - Play Aquarium
   trigger:
     platform: state
     entity_id: input_select.livingroom_media_type
@@ -22,7 +22,7 @@
       entity_id: switch.livingroom_aquarium
 
 ## Play Fireplace
-- alias: Living Room play - Fireplace
+- alias: Living Room - Play Fireplace
   trigger:
     platform: state
     entity_id: input_select.livingroom_media_type
@@ -33,7 +33,7 @@
       entity_id: switch.livingroom_fireplace
 
 ## Play Mountains
-- alias: Living Room play - Mountains
+- alias: Living Room - Play Mountains
   trigger:
     platform: state
     entity_id: input_select.livingroom_media_type
@@ -44,7 +44,7 @@
       entity_id: switch.livingroom_mountains
 
 ## Play Cuckoo
-- alias: Living Room play - Cuckoo
+- alias: Living Room - Play Cuckoo
   trigger:
     platform: state
     entity_id: input_select.livingroom_media_type
@@ -55,7 +55,7 @@
       entity_id: script.livingroom_cuckoo_audio
 
 ## Play Grandfather Clock
-- alias: Living Room play - Grandfather Clock
+- alias: Living Room - Play Grandfather Clock
   trigger:
     platform: state
     entity_id: input_select.livingroom_media_type
@@ -66,7 +66,7 @@
       entity_id: script.livingroom_clock_audio     
       
 ## Play Daniel's Room
-- alias: Living Room play - Daniel's Room
+- alias: Living Room - Play Daniel's Room
   trigger:
     platform: state
     entity_id: input_select.livingroom_media_type
@@ -77,7 +77,7 @@
       entity_id: switch.livingroom_watch_daniel      
 
 ## Play Baby Room
-- alias: Living Room play - Baby Room
+- alias: Living Room - Play Baby Room
   trigger:
     platform: state
     entity_id: input_select.livingroom_media_type

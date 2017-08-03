@@ -1,0 +1,33 @@
+#
+# Lennox (Climate)
+#    
+
+#Cool point override
+#----------------------------
+lennox_coolto_override:
+ alias: Lennox - Cool-to Override
+ sequence:
+     #Turn over-ride state on (so we can only have 1 override event at a time)
+     - service: input_boolean.turn_on
+       entity_id: input_boolean.lennox_override
+     #Save the original temp value
+     - service: input_slider.select_value
+       data_template:
+        entity_id: input_slider.lennox_lastvalue
+        value: '{{ states.sensor.lennox_cool_to.state | float}}'
+     #Lower our cool point by X degrees
+     - service: input_slider.select_value
+       data_template:
+        entity_id: input_slider.lennox_coolto
+        value: '{{ states.input_slider.lennox_lastvalue.state | float - states.input_slider.lennox_override_temp_delta.state | float }}'
+     #Wait X hrs
+     - delay: '00:{{ states.input_slider.lennox_override_time.state | int }}:00'
+     #Restore original temp value
+     - service: input_slider.select_value
+       data_template:
+        entity_id: input_slider.lennox_coolto
+        value: '{{ states.input_slider.lennox_lastvalue.state | float}}'
+     #Turn over-ride state back off
+     - service: input_boolean.turn_off
+       entity_id: input_boolean.lennox_override
+    

@@ -35,3 +35,12 @@
              else
                return "temp-very-high-background";
              '              
+         - name: Binary Sensors
+           entities:
+             - binary_sensor.foscam_motion
+             - binary_sensor.foscam2_motion
+           states:
+             - state: 'off'
+               class: 'info-background'
+             - state: 'on'
+               class: 'warning-background'

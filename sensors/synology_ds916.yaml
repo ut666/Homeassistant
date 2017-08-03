@@ -1,12 +1,18 @@
 platform: synologydsm
 name: "DS916"
 host: 10.0.0.109
-port: 5001
+port: 5000
 username: secret !synology_username
 password: secret !synology_password
+volumes: volume_1
+disks: 
+  - sda
+  - sdb
+  - sdc
+  - sdd
 monitored_conditions:
   - cpu_total_load
   - memory_real_usage
-  - network_up
-#  - volume_disk_temp_avg
-#  - volume_percentage_used
+#  - network_up
+  - volume_disk_temp_avg
+  - volume_percentage_used

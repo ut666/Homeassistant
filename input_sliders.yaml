@@ -1,15 +1,118 @@
-office_floor_lamps:
-  name: Floor Lamps
+#------------
+# Office
+#------------
+office_lamp:
+  name: Brightness
   min: 0
   max: 254
   initial: 254
   step: 1
-  icon: mdi:lightbulb-on
+  icon: mdi:brightness-5
   
-office_ambient_lights:
-  name: Ambient Lights
+office_ambient:
+  name: Brightness
   min: 0
   max: 254
   initial: 254
   step: 1
-  icon: mdi:lightbulb-on
+  icon: mdi:brightness-5
+
+#------------
+# Bedroom
+#------------
+martas_light:
+  name: Brightness
+  min: 0
+  max: 254
+  initial: 254
+  step: 1
+  icon: mdi:brightness-5
+  
+jeromes_light:
+  name: Brightness
+  min: 0
+  max: 254
+  initial: 254
+  step: 1
+  icon: mdi:brightness-5
+  
+#------------
+# Family Room
+#------------
+led_strip:
+  name: Brightness
+  min: 0
+  max: 254
+  initial: 254
+  step: 1
+  icon: mdi:brightness-5
+  
+led_strip_speed:
+   name: Animation Speed
+   initial: 150
+   min: 1
+   max: 150
+   step: 10  
+   
+#------------
+# Thermostat
+#------------
+lennox_coolto:
+   name: Cool-to
+   initial: 25
+   min: 7
+   max: 35
+   step: 0.5  
+   
+lennox_heatto:
+   name: Heat-to
+   initial: 25
+   min: 7
+   max: 35
+   step: 0.5
+
+#This is used to specify
+#the override high temp trigger   
+lennox_override_high:
+   name: High
+   initial: 29
+   min: 7
+   max: 35
+   step: 0.5
+
+#This is used to specify
+#the override low temp trigger
+lennox_override_low:
+   name: Low
+   initial: 20
+   min: 7
+   max: 35
+   step: 0.5
+   
+#This is used to specify
+#the override period   
+lennox_override_time:
+   name: Override Time (Hrs)
+   initial: 2
+   min: 1
+   max: 8
+   step: 1 
+
+#This is used to specify
+#the temperature adjustment (C)   
+lennox_override_temp_delta:
+   name: Temperature Adjustment (C)
+   initial: 5
+   min: 1
+   max: 10
+   step: 1 
+   
+#This is used to store the 
+#previous value of the thermostat
+#during our over-ride automations
+lennox_lastvalue:
+   name: Last-value
+   initial: 25
+   min: 7
+   max: 35
+   step: 0.5

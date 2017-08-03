@@ -1,0 +1,47 @@
+- alias: "Lennox - Set Heat-to"
+  trigger:
+    platform: state
+    entity_id: input_slider.lennox_heatto
+  action:
+    service: climate.set_temperature
+    data_template:
+       entity_id: climate.lennox
+       target_temp_high: '{{ states.input_slider.lennox_coolto.state | float }}'
+       target_temp_low: '{{ states.input_slider.lennox_heatto.state | float }}'
+
+- alias: "Lennox - Set Cool-to"
+  trigger:
+    platform: state
+    entity_id: input_slider.lennox_coolto
+  action:
+    service: climate.set_temperature
+    data_template:
+       entity_id: climate.lennox
+       target_temp_high: "{{ states.input_slider.lennox_coolto.state | float }}"
+       target_temp_low: "{{ states.input_slider.lennox_heatto.state | float }}"
+       
+- alias: "Lennox - Get Cool-to"
+  trigger:
+    platform: state
+    entity_id: sensor.lennox_cool_to
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.lennox_cool_to.state != states.input_slider.lennox_coolto.state }}'
+  action:
+    service: input_slider.select_value
+    data_template:
+       entity_id: input_slider.lennox_coolto
+       value: "{{ states.sensor.lennox_cool_to.state | float }}"
+       
+- alias: "Lennox - Get Heat-to"
+  trigger:
+    platform: state
+    entity_id: sensor.lennox_heat_to
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.lennox_heat_to.state != states.input_slider.lennox_heatto.state }}'
+  action:
+    service: input_slider.select_value
+    data_template:
+       entity_id: input_slider.lennox_heatto
+       value: "{{ states.sensor.lennox_heat_to.state | float }}"

@@ -1,0 +1,12 @@
+[Unit]
+Description=Home Assistant
+After=network.target
+
+[Service]
+Type=simple
+User=hass
+ExecStartPre=source /srv/homeassistant/homeassistant_venv/bin/activate
+ExecStart=/srv/homeassistant/homeassistant_venv/bin/hass --config "/home/homeassistant/.homeassistant/"
+
+[Install]
+WantedBy=multi-user.target

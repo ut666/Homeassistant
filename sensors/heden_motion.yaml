@@ -1,0 +1,4 @@
+platform: command_line
+name: "heden_motion"
+command: !secret heden_motion
+scan_interval: 2

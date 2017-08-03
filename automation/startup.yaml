@@ -1,0 +1,10 @@
+automation:
+  trigger:
+      platform: homeassistant
+      event: start
+  action:
+    - delay: '00:05:00'
+    - service: automation.trigger
+      entity_id: automation.lennox__get_heatto
+    - service: automation.trigger
+      entity_id: automation.lennox__get_coolto

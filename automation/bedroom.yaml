@@ -1,0 +1,48 @@
+#----------------------
+# Lights Sliders
+#----------------------
+
+- alias: Bedroom - Martas Set Brightness
+  trigger:
+    platform: state
+    entity_id: input_slider.martas_light
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.martas_light
+      brightness: '{{ states.input_slider.martas_light.state | int }}'
+
+- alias: "Bedroom - Martas Get Brightness"
+  trigger:
+    platform: numeric_state
+    entity_id: light.martas_light
+    value_template: "{{ states.light.martas_light.attributes.brightness | int }}"
+    above: -1
+  action:
+    service: input_slider.select_value
+    data_template:
+       entity_id: input_slider.martas_light
+       value: "{{ states.light.martas_light.attributes.brightness | int }}"
+
+- alias: Bedroom - Jeromes Set Brightness
+  trigger:
+    platform: state
+    entity_id: input_slider.jeromes_light
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.jeromes_light
+      brightness: '{{ states.input_slider.jeromes_light.state  | int }}'
+
+- alias: "Bedroom - Jeromes Get Brightness"
+  trigger:
+    platform: numeric_state
+    entity_id: light.jeromes_light
+    value_template: "{{ states.light.jeromes_light.attributes.brightness | int }}"
+    above: -1
+  action:
+    service: input_slider.select_value
+    data_template:
+       entity_id: input_slider.jeromes_light
+       value: "{{ states.light.jeromes_light.attributes.brightness | int }}"
+      

@@ -1,6 +1,5 @@
 # Homeassistant
-My homeassitant setup/configuration files
-
+My homeassitant setup/configuration files, an ever lasting journey!
 Current setup is running on a RasperryPi 1 Model B.
 
 Devices & Hubs:

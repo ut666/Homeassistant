@@ -22,7 +22,7 @@ DYI Stuff:
 - 2 x ESP8266 + DHT22 (temp/humidity sensor)
 - 1 x ESP8266 + Relay (AC outlet)
 - 1 x ESP8266 + TM1803 (led strip)
-(always more stuff waiting to be built!)
+- (always more stuff waiting to be built!)
 
 Cool software to help device automationss:
 - For Android

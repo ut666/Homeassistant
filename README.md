@@ -34,10 +34,10 @@ Cool software to help device automationss:
 
 Screenshots:
 
-![ScreenShot](images\overview.jpeg)
-![ScreenShot](images\climate.jpeg)
-![ScreenShot](images\lights.jpeg)
-![ScreenShot](images\security.jpeg)
-![ScreenShot](images\media.jpeg)
-![ScreenShot](images\floorplan.jpeg)
-![ScreenShot](images\system.jpeg)
+![ScreenShot](/images/overview.jpeg)
+![ScreenShot](/images/climate.jpeg)
+![ScreenShot](/images/lights.jpeg)
+![ScreenShot](/images/security.jpeg)
+![ScreenShot](/images/media.jpeg)
+![ScreenShot](/images/floorplan.jpeg)
+![ScreenShot](/images/system.jpeg)

@@ -31,3 +31,13 @@ Cool software to help device automationss:
 -- Jailbreak + SSH + Activator
 - For Windows
 -- EventGhost
+
+Screenshots:
+
+![ScreenShot](images\overview.jpeg)
+![ScreenShot](images\climate.jpeg)
+![ScreenShot](images\lights.jpeg)
+![ScreenShot](images\security.jpeg)
+![ScreenShot](images\media.jpeg)
+![ScreenShot](images\floorplan.jpeg)
+![ScreenShot](images\system.jpeg)

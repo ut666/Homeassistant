@@ -11,6 +11,7 @@ Devices & Hubs:
 - 3 x Philps Hue Color Bulbs
 - 2 x Philips Living Colors (with gen2 remotes)
 - 1 x GE Z-wave inwall dimmer
+- 1 x Lennox iComfort thermostat
 - 2 x FOSCAM FI9826W ipcam
 - 1 x Heden VisionCam V5.5 ipcam
 - 1 x LG 70UH6350 WebOS TV

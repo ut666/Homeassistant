@@ -1,6 +1,7 @@
 deps/
 info/
 tts/
+unused/
 sounds/
 custom_components/sensor/__pycache__/
 *.db
@@ -10,3 +11,7 @@ custom_components/sensor/__pycache__/
 *.svg
 google_calendars.yaml
 secrets.yaml
+plex.conf
+phue.conf
+known_devices.yaml
+webostv.conf

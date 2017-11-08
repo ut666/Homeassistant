@@ -5,12 +5,13 @@ Current setup is running on a RasperryPi 1 Model B.
 Devices & Hubs:
 - 1 x Philips Hue Hub (gen1)
 - 1 x Samsung SmartThings Hub
-- 4 x Amazon Echo dot
+- 5 x Amazon Echo dot
 - 1 x Synology DS916+
 - 1 x Synology DS409
 - 3 x Philps Hue Color Bulbs
 - 2 x Philips Living Colors (with gen2 remotes)
-- 1 x GE Z-wave inwall dimmer
+- 2 x GE Z-wave inwall dimmers
+- 2 x GE Z-wave outdoor switch
 - 1 x Lennox iComfort thermostat
 - 2 x FOSCAM FI9826W ipcam
 - 1 x Heden VisionCam V5.5 ipcam
@@ -21,8 +22,8 @@ Devices & Hubs:
 DYI Stuff:
 - 1 x RasperryPi + PIR (motion sensor)
 - 2 x ESP8266 + DHT22 (temp/humidity sensor)
-- 1 x ESP8266 + Relay (AC outlet)
-- 1 x ESP8266 + TM1803 (led strip)
+- 2 x ESP8266 + Relay (AC outlet)
+- 2 x ESP8266 + TM1803 (led strip)
 - (always more stuff waiting to be built!)
 
 Cool software to help device automationss:
@@ -31,7 +32,7 @@ Cool software to help device automationss:
 - For iOS
 -- Jailbreak + SSH + Activator
 - For Windows
--- EventGhost
+-- EventGhost, Cortana
 
 Screenshots:
 
